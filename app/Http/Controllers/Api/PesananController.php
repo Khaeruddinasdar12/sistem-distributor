@@ -14,62 +14,70 @@ class PesananController extends Controller
 	{
 		$data = User::find($id);
 
-    	if($data == '') {
-    		return response()->json([
-    			'status'    => false,
-    			'message'   => 'Id Tidak ditemukan'
-    		]);
-    	}
+		if($data == '') {
+			return response()->json([
+				'status'    => false,
+				'message'   => 'Id Tidak ditemukan'
+			]);
+		}
 
-    	if($data->role != 'pengecer' ) {
-    		return response()->json([
-    			'status'    => false,
-    			'message'   => 'User ini BUKAN pengecer, user ini peternak'
-    		]);
-    	}
+		if($data->role != 'pengecer' ) {
+			return response()->json([
+				'status'    => false,
+				'message'   => 'User ini BUKAN pengecer, user ini peternak'
+			]);
+		}
 
 		$data = Pesanan::where('status', '0')->where('user_id', $id)->get();
 
 		return response()->json([
-   			'status'    => true,
-   			'message'   => 'Berhasil menambah pesanan',
-   			'data'		=> $data,
-    	]);
+			'status'    => true,
+			'message'   => 'Berhasil menambah pesanan',
+			'data'		=> $data,
+		]);
 	}
 
 	public function listRiwayat($id) // list riwayat pesanan pengecer
 	{
 		$data = User::find($id);
 
-    	if($data == '') {
-    		return response()->json([
-    			'status'    => false,
-    			'message'   => 'Id Tidak ditemukan'
-    		]);
-    	}
+		if($data == '') {
+			return response()->json([
+				'status'    => false,
+				'message'   => 'Id Tidak ditemukan'
+			]);
+		}
 
-    	if($data->role != 'pengecer' ) {
-    		return response()->json([
-    			'status'    => false,
-    			'message'   => 'User ini BUKAN pengecer, user ini peternak'
-    		]);
-    	}
+		if($data->role != 'pengecer' ) {
+			return response()->json([
+				'status'    => false,
+				'message'   => 'User ini BUKAN pengecer, user ini peternak'
+			]);
+		}
 
 		$data = Pesanan::where('status', '1')->where('user_id', $id)->get();
 
 		return response()->json([
-   			'status'    => true,
-   			'message'   => 'Berhasil menambah pesanan',
-   			'data'		=> $data,
-    	]);
+			'status'    => true,
+			'message'   => 'Berhasil menambah pesanan',
+			'data'		=> $data,
+		]);
 	}
 
     public function store(Request $request, $id) //menambah pesanan pengecer
     {
     	$validator = Validator::make($request->all(), [
-                'jumlah_ayam' 	=> 'required|numeric',
-                'nohp' 			=> 'required|numeric',
-            ]);
+    		'jumlah_ayam' 	=> 'required|numeric',
+    		'nohp' 			=> 'required|numeric',
+    	]);
+
+    	if($validator->fails()) {
+    		$message = $validator->messages()->first();
+    		return response()->json([
+    			'status' => false,
+    			'messsage' => $message
+    		]);
+    	}
 
     	$data = User::find($id);
 
@@ -93,9 +101,10 @@ class PesananController extends Controller
     	$data->status = '0';
     	$data->save();
 
+
     	return response()->json([
-   			'status'    => true,
-   			'message'   => 'Berhasil menambah pesanan'
+    		'status'    => true,
+    		'message'   => 'Berhasil menambah pesanan'
     	]);    	
 
     }
