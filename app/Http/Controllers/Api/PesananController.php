@@ -32,7 +32,7 @@ class PesananController extends Controller
 
 		return response()->json([
 			'status'    => true,
-			'message'   => 'Berhasil menambah pesanan',
+			'message'   => 'List pesanan',
 			'data'		=> $data,
 		]);
 	}
@@ -59,7 +59,7 @@ class PesananController extends Controller
 
 		return response()->json([
 			'status'    => true,
-			'message'   => 'Berhasil menambah pesanan',
+			'message'   => 'List Riwayat Pesanan',
 			'data'		=> $data,
 		]);
 	}
