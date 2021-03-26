@@ -37,6 +37,7 @@ Manage Obat
                     <th>No.</th>
                     <th>Nama Obat</th>
                     <th>Stok</th>
+                    <th>Harga</th>
                     <th>Action</th>
                   </tr>
                 </thead>  
@@ -74,6 +75,10 @@ Manage Obat
             <label for="recipient-name" class="col-form-label">Stok (Bungkus):</label>
             <input type="text" class="form-control" id="stok" name="stok">
           </div>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Harga (Rp):</label>
+            <input type="text" class="form-control" id="harga" name="harga">
+          </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -105,7 +110,11 @@ Manage Obat
           </div>
           <div class="form-group">
             <label>Stok (Bungkus)</label>
-            <input type="text" class="form-control" name="stok">
+            <input type="number" class="form-control" name="stok">
+          </div>
+          <div class="form-group">
+            <label>Harga (Rp)</label>
+            <input type="number" class="form-control" name="harga">
           </div>
         </div>
 
@@ -128,13 +137,15 @@ Manage Obat
   var href = button.data('href') 
   var id = button.data('id') 
   var nama = button.data('nama')
-  var stok = button.data('stok')  
+  var stok = button.data('stok') 
+  var harga = button.data('harga')  
 
   var modal = $(this)
   modal.find('.modal-body #edit-pengecer').attr('action', href)
   modal.find('.modal-body #hidden-id').val(id)
   modal.find('.modal-body #nama').val(nama)
   modal.find('.modal-body #stok').val(stok)
+  modal.find('.modal-body #harga').val(harga)
 })
 
   function berhasil(status, pesan) {
@@ -267,6 +278,7 @@ Manage Obat
               { data: 'DT_RowIndex', name:'DT_RowIndex'},
               { "data": "nama" },
               { "data": "stok" },
+              { "data": "harga" },
               { "data": "action" },
               ]
             });

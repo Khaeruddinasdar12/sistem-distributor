@@ -17,12 +17,20 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::prefix('admin')->group(function() {
 	Route::get('/', 'DashboardController@index')->name('admin.dashboard');
-	Route::get('/profile','DashboardController@profile')->name('admin.profile'); //profile admin
 
 	Route::get('/login','Auth\AdminLoginController@showLoginForm')->name('admin.login');
 	Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
 	Route::post('logout/', 'Auth\AdminLoginController@logout')->name('admin.logout');
-		
+	
+
+	// LAPORAN HARIAN
+	Route::get('/table-laporan-harian','LaporanHarianController@table')->name('table.laporanharian'); // api laporan harian
+
+	Route::get('/laporan-harian/{id}','LaporanHarianController@laporan')->name('laporan.harian.distribusi');
+	Route::get('/laporan-harian','LaporanHarianController@index')->name('laporan.harian');
+	// END LAPORAN HARIAN
+
+
 	// PESANAN
 	Route::get('/table-pesanan','PesananController@table')->name('table.pesanan'); // api pesanan
 	Route::get('/table-riwayat-pesanan','PesananController@tableRiwayat')->name('table.riwayatpesanan'); // api riwayat pesanan

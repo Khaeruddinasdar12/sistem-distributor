@@ -20,10 +20,6 @@ class PakanController extends Controller
 
     public function store(Request $request) // tambah data pakan
     {	
-    	// return $arrayName = array(
-    	// 	'status' => 'success',
-    	// 	'pesan' => 'Berhasil Menambah Obat. '
-    	// );
     	$validasi = $this->validate($request, [
     		'nama' => 'required|string',
     		'stok' => 'required|numeric',
@@ -32,6 +28,7 @@ class PakanController extends Controller
     	$data = new Pakan;
     	$data->nama 	= $request->nama;
     	$data->stok 	= $request->stok;
+        $data->harga    = $request->harga;
     	$data->save();
 
     	return $arrayName = array(
@@ -51,6 +48,7 @@ class PakanController extends Controller
     	$data = Pakan::findOrFail($id);
     	$data->nama 	= $request->nama;
     	$data->stok 	= $request->stok;
+        $data->harga    = $request->harga;
     	$data->save();
 
     	return $arrayName = array(
@@ -72,7 +70,7 @@ class PakanController extends Controller
 
     public function table() // api table pakan untuk datatable
     {
-    	$data = Pakan::select('id', 'nama', 'stok')
+    	$data = Pakan::select('id', 'nama', 'stok', 'harga')
     	->orderBy('created_at', 'desc')
     	->get();
 
@@ -87,6 +85,7 @@ class PakanController extends Controller
     		data-id='".$data->id."'
             data-nama='".$data->nama."'
             data-stok='".$data->stok."'
+            data-harga='".$data->harga."'
     		>
     		<i class='fa fa-user-edit'></i>
     		</a>
@@ -100,6 +99,9 @@ class PakanController extends Controller
             <i class='fa fa-trash'></i>
             </button>";
     	})
+        ->editColumn('harga', function($data){
+            return "Rp. ".format_uang($data->harga);
+        })
     	->addIndexColumn() 
     	->make(true);
     }
