@@ -28,22 +28,16 @@ class LoginPengecerController extends Controller
 			]);
 		}
 
-		// return response()->json([
-		// 	'status'    => true,
-		// 	'message'   => 'Berhasil login',
-		// 	'id'		=> $user->id,
-		// 	'nama'		=> $user->name,
-		// 	'email'		=> $user->email,
-		// 	'nohp'		=> $user->nohp,
-		// 	'noktp'		=> $user->noktp,
-		// 	'alanat'	=> $user->alamat
-		// ]); 
-
 		return response()->json([
 			'status'    => true,
 			'message'   => 'Berhasil login',
-			'data'		=> $user
-		]);
+			'id'		=> $user->id,
+			'nama'		=> $user->name,
+			'email'		=> $user->email,
+			'nohp'		=> $user->nohp,
+			'noktp'		=> $user->noktp,
+			'alanat'	=> $user->alamat
+		]); 
 	}
 
 	public function profile($id) //profile pengecer 
@@ -57,21 +51,15 @@ class LoginPengecerController extends Controller
 			]);
 		}
 
-		// return response()->json([
-		// 	'status'    => true,
-		// 	'message'   => 'Profile user',
-		// 	'id'		=> $data->id,
-		// 	'nama'		=> $data->name,
-		// 	'email'		=> $data->email,
-		// 	'nohp'		=> $data->nohp,
-		// 	'noktp'		=> $data->noktp,
-		// 	'alanat'	=> $data->alamat
-		// ]); 
-
 		return response()->json([
 			'status'    => true,
 			'message'   => 'Profile user',
-			'data'		=> $data
-		]);
+			'id'		=> $data->id,
+			'nama'		=> $data->name,
+			'email'		=> $data->email,
+			'nohp'		=> $data->nohp,
+			'noktp'		=> $data->noktp,
+			'alanat'	=> $data->alamat
+		]); 
 	}
 }

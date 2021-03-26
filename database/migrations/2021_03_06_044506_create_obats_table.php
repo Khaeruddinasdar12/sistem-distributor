@@ -16,7 +16,8 @@ class CreateObatsTable extends Migration
         Schema::create('obats', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
-            $table->string('stok');
+            $table->integer('stok');
+            $table->integer('harga');
             $table->timestamps();
         });
     }

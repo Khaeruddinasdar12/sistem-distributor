@@ -20,4 +20,9 @@ class Distribusi extends Model
     {
         return $this->belongsTo('App\Obat', 'obat_id');
     }
+
+    public function laporan()
+    {
+        return $this->hasMany(LaporanHarian::class, 'distribusi_id');
+    }
 }

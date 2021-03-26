@@ -127,7 +127,7 @@
           </li>
 
           <li class="nav-item">
-            <a href="" class="nav-link {{ request()->is('laporan') ? 'active' : '' }}">
+            <a href="{{route('laporan.harian')}}" class="nav-link {{ request()->is('admin/laporan-harian') || request()->is('admin/laporan-harian/*') ? 'active' : '' }}">
               <i class="nav-icon fas fa-calendar"></i>
               <p>
                 Laporan Harian

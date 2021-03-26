@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Obat;
 use DataTables;
-
+// use App\Helpers\FormatUang;
 class ObatController extends Controller
 {
     public function __construct()
@@ -32,6 +32,7 @@ class ObatController extends Controller
     	$data = new Obat;
     	$data->nama 	= $request->nama;
     	$data->stok 	= $request->stok;
+        $data->harga    = $request->harga;
     	$data->save();
 
     	return $arrayName = array(
@@ -51,6 +52,7 @@ class ObatController extends Controller
     	$data = Obat::findOrFail($id);
     	$data->nama 	= $request->nama;
     	$data->stok 	= $request->stok;
+        $data->harga    = $request->harga;
     	$data->save();
 
     	return $arrayName = array(
@@ -73,7 +75,7 @@ class ObatController extends Controller
 
     public function table() // api table obat untuk datatable
     {
-    	$data = Obat::select('id', 'nama', 'stok')
+    	$data = Obat::select('id', 'nama', 'stok', 'harga')
     	->orderBy('created_at', 'desc')
     	->get();
 
@@ -88,6 +90,7 @@ class ObatController extends Controller
     		data-id='".$data->id."'
     		data-nama='".$data->nama."'
     		data-stok='".$data->stok."'
+            data-harga='".$data->harga."'
     		>
     		<i class='fa fa-edit'></i>
     		</a>
@@ -101,6 +104,9 @@ class ObatController extends Controller
     		<i class='fa fa-trash'></i>
     		</button>";
     	})
+        ->editColumn('harga', function($data){
+            return "Rp. ".format_uang($data->harga);
+        })
     	->addIndexColumn() 
     	->make(true);
     }
