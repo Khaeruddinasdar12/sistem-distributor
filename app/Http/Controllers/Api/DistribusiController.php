@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Distribusi;
 use App\User;
+use Illuminate\Support\Facades\Validator;
 
 class DistribusiController extends Controller
 {	
