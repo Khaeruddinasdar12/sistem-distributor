@@ -29,9 +29,9 @@ Route::post('/pengecer/login', 'Api\LoginPengecerController@login'); //login pen
 Route::get('/pengecer/profile/{id}', 'Api\LoginPengecerController@profile'); //profile pengecer
 
 
-Route::post('/pengecer/tambah-pesanan/{id}', 'Api\PesananController@store'); //tambah pesanan
-Route::get('/pengecer/pesanan/{id}', 'Api\PesananController@list'); //list pesanan (belum konfirmasi)
-Route::get('/pengecer/riwayat-pesanan/{id}', 'Api\PesananController@listRiwayat'); //list riwayat pesanan (terkonfirmasi konfirmasi)
+Route::post('/pengecer/tambah-pesanan', 'Api\PesananController@store'); //tambah pesanan
+Route::post('/pengecer/pesanan', 'Api\PesananController@list'); //list pesanan (belum konfirmasi)
+Route::post('/pengecer/riwayat-pesanan', 'Api\PesananController@listRiwayat'); //list riwayat pesanan (terkonfirmasi konfirmasi)
 // END PENGECER
 
 
