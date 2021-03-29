@@ -17,6 +17,13 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+// LIST OBAT & PAKAN
+Route::get('/list-obat', 'Api\ObatPakanController@obat'); //list obat
+Route::get('/list-pakan', 'Api\ObatPakanController@pakan'); //list obat
+// END LIST OBAT & PAKAN
+
+
 // PENGECER
 Route::post('/pengecer/login', 'Api\LoginPengecerController@login'); //login pengecer
 Route::get('/pengecer/profile/{id}', 'Api\LoginPengecerController@profile'); //profile pengecer
