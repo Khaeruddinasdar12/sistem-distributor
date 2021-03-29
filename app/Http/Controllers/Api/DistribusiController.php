@@ -9,9 +9,21 @@ use App\User;
 
 class DistribusiController extends Controller
 {	
-    public function index($id) // list distribusi belum diterima
+    public function index(Request $request) // list distribusi belum diterima
     {	
-    	$data = User::find($id);
+        $validator = Validator::make($request->all(), [
+            'user_id'       => 'required|numeric',
+        ]);
+
+        if($validator->fails()) {
+            $message = $validator->messages()->first();
+            return response()->json([
+                'status' => false,
+                'messsage' => $message
+            ]);
+        }
+
+    	$data = User::find($request->user_id);
 
     	if($data == '') {
     		return response()->json([
@@ -27,7 +39,7 @@ class DistribusiController extends Controller
     		]);
     	}
 
-    	$data = Distribusi::where('user_id', $id)
+    	$data = Distribusi::where('user_id', $request->id)
     			->where('status', '0') // belum terkonfirmasi
     			->where('open', '0') //masih berlangsung
     			->orderBy('created_at', 'desc')
@@ -40,9 +52,20 @@ class DistribusiController extends Controller
     	]); 
     }
 
-    public function sedang($id) // list distribusi terkonfirmasi
+    public function sedang(Request $request) // list distribusi terkonfirmasi
     {	
-    	$data = User::find($id);
+        $validator = Validator::make($request->all(), [
+            'user_id'       => 'required|numeric',
+        ]);
+
+        if($validator->fails()) {
+            $message = $validator->messages()->first();
+            return response()->json([
+                'status' => false,
+                'messsage' => $message
+            ]);
+        }
+    	$data = User::find($request->user_id);
 
     	if($data == '') {
     		return response()->json([
@@ -58,7 +81,7 @@ class DistribusiController extends Controller
     		]);
     	}
 
-    	$data = Distribusi::where('user_id', $id)
+    	$data = Distribusi::where('user_id', $request->user_id)
     			->where('status', '1') // terkonfirmasi
     			->where('open', '0') //masih berlangsung
     			->orderBy('created_at', 'desc')
@@ -71,9 +94,21 @@ class DistribusiController extends Controller
     	]); 
     }
 
-    public function riwayat($id) // list riwayat distribusi
+    public function riwayat(Request $request) // list riwayat distribusi
     {	
-    	$data = User::find($id);
+        $validator = Validator::make($request->all(), [
+            'user_id'       => 'required|numeric',
+        ]);
+
+        if($validator->fails()) {
+            $message = $validator->messages()->first();
+            return response()->json([
+                'status' => false,
+                'messsage' => $message
+            ]);
+        }
+
+    	$data = User::find($request->user_id);
 
     	if($data == '') {
     		return response()->json([
@@ -89,7 +124,7 @@ class DistribusiController extends Controller
     		]);
     	}
 
-    	$data = Distribusi::where('user_id', $id)
+    	$data = Distribusi::where('user_id', $request->user_id)
     			->where('status', '1') // terkonfirmasi
     			->where('open', '1') // telah ditutup (riwayat)
     			->orderBy('created_at', 'desc')
@@ -102,9 +137,21 @@ class DistribusiController extends Controller
     	]); 
     }
 
-    public function konfirmasi($user_id, $distribusi_d) // konfirmasi distribusi
+    public function konfirmasi(Request $request) // konfirmasi distribusi
     {	
-    	$data = User::find($user_id);
+        $validator = Validator::make($request->all(), [
+            'user_id'       => 'required|numeric',
+            'distribusi_id' => 'required|numeric',
+        ]);
+
+        if($validator->fails()) {
+            $message = $validator->messages()->first();
+            return response()->json([
+                'status' => false,
+                'messsage' => $message
+            ]);
+        }
+    	$data = User::find($request->user_id);
 
     	if($data == '') {
     		return response()->json([
@@ -120,7 +167,7 @@ class DistribusiController extends Controller
     		]);
     	}
 
-    	$data = Distribusi::find($distribusi_d);
+    	$data = Distribusi::find($request->distribusi_id);
     	if ($data == '') {
     		return response()->json([
     			'status'    => false,
@@ -137,9 +184,22 @@ class DistribusiController extends Controller
     	]); 
     }
 
-    public function tutup($user_id, $distribusi_d) // menutup distribusi
+    public function tutup(Request $request) // menutup distribusi
     {	
-    	$data = User::find($user_id);
+        $validator = Validator::make($request->all(), [
+            'user_id'       => 'required|numeric',
+            'distribusi_id' => 'required|numeric',
+        ]);
+
+        if($validator->fails()) {
+            $message = $validator->messages()->first();
+            return response()->json([
+                'status' => false,
+                'messsage' => $message
+            ]);
+        }
+
+    	$data = User::find($request->user_id);
 
     	if($data == '') {
     		return response()->json([
@@ -155,7 +215,7 @@ class DistribusiController extends Controller
     		]);
     	}
 
-    	$data = Distribusi::find($distribusi_d);
+    	$data = Distribusi::find($request->distribusi_id);
     	if ($data == '') {
     		return response()->json([
     			'status'    => false,
