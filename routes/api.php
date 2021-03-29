@@ -44,11 +44,11 @@ Route::get('/peternak/profile/{id}', 'Api\LoginPeternakController@profile'); //p
 
 
 //DISTRIBUSI
-Route::get('belum-distribusi/{id}', 'Api\DistribusiController@index'); //distribusi belum terkonfirmasi
-Route::get('sedang-distribusi/{id}', 'Api\DistribusiController@sedang'); //distribusi terkonfirmasi
-Route::get('riwayat-distribusi/{id}', 'Api\DistribusiController@riwayat'); //riwayat distribusi 
+Route::post('belum-distribusi', 'Api\DistribusiController@index'); //distribusi belum terkonfirmasi
+Route::post('sedang-distribusi', 'Api\DistribusiController@sedang'); //distribusi terkonfirmasi
+Route::post('riwayat-distribusi', 'Api\DistribusiController@riwayat'); //riwayat distribusi 
 
-Route::post('konfirmasi-distribusi/{user_id}/{distribusi_id}', 'Api\DistribusiController@konfirmasi'); //mengkonfirmasi distribusi
-Route::post('tutup-distribusi/{user_id}/{distribusi_id}', 'Api\DistribusiController@tutup'); //mengkonfirmasi distribusi
+Route::post('konfirmasi-distribusi', 'Api\DistribusiController@konfirmasi'); //mengkonfirmasi distribusi
+Route::post('tutup-distribusi', 'Api\DistribusiController@tutup'); //mengkonfirmasi distribusi
 
 // DISTRIBUSI
