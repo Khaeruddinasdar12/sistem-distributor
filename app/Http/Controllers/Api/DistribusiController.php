@@ -40,7 +40,7 @@ class DistribusiController extends Controller
     		]);
     	}
 
-    	$data = Distribusi::where('user_id', $request->id)
+    	$data = Distribusi::where('user_id', $request->user_id)
     			->where('status', '0') // belum terkonfirmasi
     			->where('open', '0') //masih berlangsung
     			->orderBy('created_at', 'desc')
