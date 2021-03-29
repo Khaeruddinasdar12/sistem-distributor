@@ -52,3 +52,11 @@ Route::post('konfirmasi-distribusi', 'Api\DistribusiController@konfirmasi'); //m
 Route::post('tutup-distribusi', 'Api\DistribusiController@tutup'); //mengkonfirmasi distribusi
 
 // DISTRIBUSI
+
+//LAPORAN HARIAN
+Route::post('laporan-harian', 'Api\LaporanHarianController@store'); //input laporan harian 
+// END LAPORANH HARIAN
+
+//LAPORAN PANEN
+Route::post('laporan-panen', 'Api\LaporanPanenController@store'); //input laporan panen 
+// END LAPORANH PANEN

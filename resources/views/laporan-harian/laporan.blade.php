@@ -61,7 +61,7 @@ Laporan Harian Distribusi
                 <td>:</td>
                 @php $sts = 'danger'; $msg = ''; @endphp
 
-                @if($data->open == "1")
+                @if($data->open == "0")
                   @php 
                     $sts = 'warning'; 
                     $msg = 'Distribusi Masih Berlangsung'; 
