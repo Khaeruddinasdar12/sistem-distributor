@@ -10,9 +10,21 @@ use Illuminate\Support\Facades\Validator;
 
 class PesananController extends Controller
 {
-	public function list($id) // list pesanan pengecer
-	{
-		$data = User::find($id);
+	public function list(Request $request) // list pesanan pengecer
+	{	
+		$validator = Validator::make($request->all(), [
+    		'user_id'		=> 'required|numeric',
+    	]);
+
+    	if($validator->fails()) {
+    		$message = $validator->messages()->first();
+    		return response()->json([
+    			'status' => false,
+    			'messsage' => $message
+    		]);
+    	}
+
+		$data = User::find($request->user_id);
 
 		if($data == '') {
 			return response()->json([
@@ -28,7 +40,7 @@ class PesananController extends Controller
 			]);
 		}
 
-		$data = Pesanan::where('status', '0')->where('user_id', $id)->get();
+		$data = Pesanan::where('status', '0')->where('user_id', $request->user_id)->get();
 
 		return response()->json([
 			'status'    => true,
@@ -37,9 +49,21 @@ class PesananController extends Controller
 		]);
 	}
 
-	public function listRiwayat($id) // list riwayat pesanan pengecer
+	public function listRiwayat(Request $request) // list riwayat pesanan pengecer
 	{
-		$data = User::find($id);
+		$validator = Validator::make($request->all(), [
+    		'user_id'		=> 'required|numeric',
+    	]);
+
+    	if($validator->fails()) {
+    		$message = $validator->messages()->first();
+    		return response()->json([
+    			'status' => false,
+    			'messsage' => $message
+    		]);
+    	}
+
+    	$data = User::find($request->user_id);
 
 		if($data == '') {
 			return response()->json([
@@ -55,7 +79,7 @@ class PesananController extends Controller
 			]);
 		}
 
-		$data = Pesanan::where('status', '1')->where('user_id', $id)->get();
+		$data = Pesanan::where('status', '1')->where('user_id', $request->user_id)->get();
 
 		return response()->json([
 			'status'    => true,
@@ -64,9 +88,10 @@ class PesananController extends Controller
 		]);
 	}
 
-    public function store(Request $request, $id) //menambah pesanan pengecer
+    public function store(Request $request) //menambah pesanan pengecer
     {
     	$validator = Validator::make($request->all(), [
+    		'user_id'		=> 'required|numeric',
     		'jumlah_ayam' 	=> 'required|numeric',
     		'nohp' 			=> 'required|numeric',
     	]);
@@ -79,7 +104,7 @@ class PesananController extends Controller
     		]);
     	}
 
-    	$data = User::find($id);
+    	$data = User::find($request->user_id);
 
     	if($data == '') {
     		return response()->json([
@@ -95,7 +120,7 @@ class PesananController extends Controller
     		]);
     	}
     	$data = new Pesanan;
-    	$data->user_id = $id;
+    	$data->user_id = $request->user_id;
     	$data->jumlah_ayam = $request->jumlah_ayam;
     	$data->nohp = $request->nohp;
     	$data->status = '0';

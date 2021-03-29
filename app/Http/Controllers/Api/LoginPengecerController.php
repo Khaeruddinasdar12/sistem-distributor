@@ -30,7 +30,7 @@ class LoginPengecerController extends Controller
 
 		return response()->json([
 			'status'    => true,
-			'message'   => 'Berhasil login',
+			'message'   => 'Berhasil login pengecer',
 			'id'		=> $user->id,
 			'nama'		=> $user->name,
 			'email'		=> $user->email,
