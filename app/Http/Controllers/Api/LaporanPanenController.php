@@ -53,7 +53,7 @@ class LaporanPanenController extends Controller
         $data->save();
 
         return response()->json([
-            'status'    => false,
+            'status'    => true,
             'message'   => 'Berhasil menginput laporan panen',
         ]);
 	}
