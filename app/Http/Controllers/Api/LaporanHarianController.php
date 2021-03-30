@@ -91,7 +91,7 @@ class LaporanHarianController extends Controller
         $data->save();
 
         return response()->json([
-            'status'    => false,
+            'status'    => true,
             'message'   => 'Berhasil menginput laporan harian '. $time->isoFormat('dddd, D MMMM Y')
         ]);
 

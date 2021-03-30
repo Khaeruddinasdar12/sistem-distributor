@@ -40,7 +40,7 @@ class DistribusiController extends Controller
     		]);
     	}
 
-        $data = DB::table('distribusis')->select('distribusis.id', 'distribusis.no_distribusi', 'obats.nama as nama_obat', 'distribusis.jumlah_obat', 'pakans.nama as nama_pakan', 'distribusis.jumlah_pakan', 'distribusis.jumlah_ayam', 'distribusis.created_at')
+        $data = DB::table('distribusis')->select('distribusis.id', 'distribusis.user_id', 'distribusis.no_distribusi', 'obats.nama as nama_obat', 'distribusis.jumlah_obat', 'pakans.nama as nama_pakan', 'distribusis.jumlah_pakan', 'distribusis.jumlah_ayam', 'distribusis.created_at')
                 ->join('obats', 'distribusis.obat_id', 'obats.id')
                 ->join('pakans', 'distribusis.pakan_id', 'pakans.id')
                 ->where('distribusis.status', '0') //belum terkonfirmasi
@@ -83,7 +83,7 @@ class DistribusiController extends Controller
     		]);
     	}
 
-        $data = DB::table('distribusis')->select('distribusis.id', 'distribusis.no_distribusi', 'obats.nama as nama_obat', 'distribusis.jumlah_obat', 'pakans.nama as nama_pakan', 'distribusis.jumlah_pakan', 'distribusis.jumlah_ayam', 'distribusis.created_at')
+        $data = DB::table('distribusis')->select('distribusis.id', 'distribusis.user_id', 'distribusis.no_distribusi', 'obats.nama as nama_obat', 'distribusis.jumlah_obat', 'pakans.nama as nama_pakan', 'distribusis.jumlah_pakan', 'distribusis.jumlah_ayam', 'distribusis.created_at')
                 ->join('obats', 'distribusis.obat_id', 'obats.id')
                 ->join('pakans', 'distribusis.pakan_id', 'pakans.id')
                 ->where('distribusis.status', '1') // terkonfirmasi
@@ -128,7 +128,7 @@ class DistribusiController extends Controller
     		]);
     	}
 
-        $data = DB::table('distribusis')->select('distribusis.id', 'distribusis.no_distribusi', 'obats.nama as nama_obat', 'distribusis.jumlah_obat', 'pakans.nama as nama_pakan', 'distribusis.jumlah_pakan', 'distribusis.jumlah_ayam', 'distribusis.created_at')
+        $data = DB::table('distribusis')->select('distribusis.id', 'distribusis.user_id', 'distribusis.no_distribusi', 'obats.nama as nama_obat', 'distribusis.jumlah_obat', 'pakans.nama as nama_pakan', 'distribusis.jumlah_pakan', 'distribusis.jumlah_ayam', 'distribusis.created_at')
                 ->join('obats', 'distribusis.obat_id', 'obats.id')
                 ->join('pakans', 'distribusis.pakan_id', 'pakans.id')
                 ->where('distribusis.status', '1') // terkonfirmasi
