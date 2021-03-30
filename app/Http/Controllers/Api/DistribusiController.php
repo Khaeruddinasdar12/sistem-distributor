@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Distribusi;
 use App\User;
 use Illuminate\Support\Facades\Validator;
-
+use DB;
 class DistribusiController extends Controller
 {	
     public function index(Request $request) // list distribusi belum diterima
@@ -40,12 +40,13 @@ class DistribusiController extends Controller
     		]);
     	}
 
-    	$data = Distribusi::where('user_id', $request->user_id)
-    			->where('status', '0') // belum terkonfirmasi
-    			->where('open', '0') //masih berlangsung
-    			->orderBy('created_at', 'desc')
-    			->get();
-
+        $data = DB::table('distribusis')->select('distribusis.id', 'distribusis.no_distribusi', 'obats.nama as nama_obat', 'distribusis.jumlah_obat', 'pakans.nama as nama_pakan', 'distribusis.jumlah_pakan', 'distribusis.jumlah_ayam', 'distribusis.created_at')
+                ->join('obats', 'distribusis.obat_id', 'obats.id')
+                ->join('pakans', 'distribusis.pakan_id', 'pakans.id')
+                ->where('distribusis.status', '0') //belum terkonfirmasi
+                ->where('distribusis.open', '0') // masih berlangsung
+                ->orderBy('distribusis.created_at', 'desc')
+                ->get();
     	return response()->json([
    			'status'    => true,
    			'message'   => 'data distribusi belum terkonfirmasi',
@@ -82,11 +83,13 @@ class DistribusiController extends Controller
     		]);
     	}
 
-    	$data = Distribusi::where('user_id', $request->user_id)
-    			->where('status', '1') // terkonfirmasi
-    			->where('open', '0') //masih berlangsung
-    			->orderBy('created_at', 'desc')
-    			->get();
+        $data = DB::table('distribusis')->select('distribusis.id', 'distribusis.no_distribusi', 'obats.nama as nama_obat', 'distribusis.jumlah_obat', 'pakans.nama as nama_pakan', 'distribusis.jumlah_pakan', 'distribusis.jumlah_ayam', 'distribusis.created_at')
+                ->join('obats', 'distribusis.obat_id', 'obats.id')
+                ->join('pakans', 'distribusis.pakan_id', 'pakans.id')
+                ->where('distribusis.status', '1') // terkonfirmasi
+                ->where('distribusis.open', '0') // masih berlangsung
+                ->orderBy('distribusis.created_at', 'desc')
+                ->get();
 
     	return response()->json([
    			'status'    => true,
@@ -125,11 +128,13 @@ class DistribusiController extends Controller
     		]);
     	}
 
-    	$data = Distribusi::where('user_id', $request->user_id)
-    			->where('status', '1') // terkonfirmasi
-    			->where('open', '1') // telah ditutup (riwayat)
-    			->orderBy('created_at', 'desc')
-    			->get();
+        $data = DB::table('distribusis')->select('distribusis.id', 'distribusis.no_distribusi', 'obats.nama as nama_obat', 'distribusis.jumlah_obat', 'pakans.nama as nama_pakan', 'distribusis.jumlah_pakan', 'distribusis.jumlah_ayam', 'distribusis.created_at')
+                ->join('obats', 'distribusis.obat_id', 'obats.id')
+                ->join('pakans', 'distribusis.pakan_id', 'pakans.id')
+                ->where('distribusis.status', '1') // terkonfirmasi
+                ->where('distribusis.open', '1') // telah ditutup (riwayat)
+                ->orderBy('distribusis.created_at', 'desc')
+                ->get();
 
     	return response()->json([
    			'status'    => true,

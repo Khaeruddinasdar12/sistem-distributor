@@ -18,6 +18,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+// API ADMIN
+Route::post('/admin/login', 'Api\LoginAdminController@login'); //login admin
+Route::post('/admin/profile', 'Api\LoginAdminController@profile'); //profile admin
+// END API ADMIN
+
+
 // LIST OBAT & PAKAN
 Route::get('/list-obat', 'Api\ObatPakanController@obat'); //list obat
 Route::get('/list-pakan', 'Api\ObatPakanController@pakan'); //list obat
@@ -26,7 +32,7 @@ Route::get('/list-pakan', 'Api\ObatPakanController@pakan'); //list obat
 
 // PENGECER
 Route::post('/pengecer/login', 'Api\LoginPengecerController@login'); //login pengecer
-Route::get('/pengecer/profile/{id}', 'Api\LoginPengecerController@profile'); //profile pengecer
+Route::post('/pengecer/profile', 'Api\LoginPengecerController@profile'); //profile pengecer
 
 
 Route::post('/pengecer/tambah-pesanan', 'Api\PesananController@store'); //tambah pesanan
@@ -38,7 +44,7 @@ Route::post('/pengecer/riwayat-pesanan', 'Api\PesananController@listRiwayat'); /
 
 // PETERNAK
 Route::post('/peternak/login', 'Api\LoginPeternakController@login'); //login peternak
-Route::get('/peternak/profile/{id}', 'Api\LoginPeternakController@profile'); //profile peternak
+Route::post('/peternak/profile', 'Api\LoginPeternakController@profile'); //profile peternak
 
 // END PETERNAK
 
