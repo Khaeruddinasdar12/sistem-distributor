@@ -40,9 +40,9 @@ class LoginPengecerController extends Controller
 		]); 
 	}
 
-	public function profile($id) //profile pengecer 
+	public function profile(Request $request) //profile pengecer 
 	{
-		$data = User::find($id);
+		$data = User::find($request->user_id);
 
 		if($data == '') {
 			return response()->json([

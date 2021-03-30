@@ -4,45 +4,37 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\User;
+use Illuminate\Support\Facades\Validator;
 use Auth;
-
-class LoginPeternakController extends Controller
+use App\Admin;
+use Hash;
+class LoginAdminController extends Controller
 {
-    public function login(Request $request)
+	public function login(Request $request)
 	{
 		$credentials = $request->only('email', 'password');
 
-		if(!Auth::attempt($credentials)) {
+		if(!Auth::guard('admin')->attempt($credentials)) {
 			return response()->json([
 				'status'    => false,
 				'message'   => 'Kesalahan email atau password',
 			]);
-		}    
+		} 
 
-		$user = Auth::user();
-		if($user->role != 'peternak') {
-			return response()->json([
-				'status'    => false,
-				'message'   => 'Anda BUKAN Peternak',
-			]);
-		}
+		$user = Auth::guard('admin')->user();
 
 		return response()->json([
 			'status'    => true,
-			'message'   => 'Berhasil login peternak',
+			'message'   => 'Berhasil login admin',
 			'id'		=> $user->id,
 			'nama'		=> $user->name,
 			'email'		=> $user->email,
-			'nohp'		=> $user->nohp,
-			'noktp'		=> $user->noktp,
-			'alanat'	=> $user->alamat
 		]); 
 	}
 
-	public function profile(Request $request) //profile pengecer 
+	public function profile(Request $request) //profile admin 
 	{
-		$data = User::find($request->user_id);
+		$data = Admin::find($request->user_id);
 
 		if($data == '') {
 			return response()->json([
@@ -53,13 +45,10 @@ class LoginPeternakController extends Controller
 
 		return response()->json([
 			'status'    => true,
-			'message'   => 'Profile user',
+			'message'   => 'Profile admin',
 			'id'		=> $data->id,
 			'nama'		=> $data->name,
 			'email'		=> $data->email,
-			'nohp'		=> $data->nohp,
-			'noktp'		=> $data->noktp,
-			'alanat'	=> $data->alamat
 		]); 
 	}
 }
