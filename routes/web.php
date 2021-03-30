@@ -22,6 +22,12 @@ Route::prefix('admin')->group(function() {
 	Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
 	Route::post('logout/', 'Auth\AdminLoginController@logout')->name('admin.logout');
 	
+	// LAPORAN HARIAN
+	Route::get('/table-laporan-panen','LaporanPanenController@table')->name('table.laporanpanen'); // api laporan panen
+
+	Route::get('/laporan-panen','LaporanPanenController@index')->name('laporan.panen');
+	// END LAPORAN HARIAN
+
 
 	// LAPORAN HARIAN
 	Route::get('/table-laporan-harian','LaporanHarianController@table')->name('table.laporanharian'); // api laporan harian
