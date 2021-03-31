@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Api\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -8,9 +8,10 @@ use Illuminate\Support\Facades\Validator;
 use Auth;
 use App\Admin;
 use Hash;
+
 class LoginAdminController extends Controller
 {
-	public function login(Request $request)
+    public function login(Request $request)
 	{
 		$credentials = $request->only('email', 'password');
 
