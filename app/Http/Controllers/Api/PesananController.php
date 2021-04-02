@@ -40,7 +40,10 @@ class PesananController extends Controller
 			]);
 		}
 
-		$data = Pesanan::where('status', '0')->where('user_id', $request->user_id)->get();
+		$data = Pesanan::where('status', '0')
+        ->where('user_id', $request->user_id)
+        ->orderBy('created_at', 'desc')
+        ->get();
 
 		return response()->json([
 			'status'    => true,
@@ -79,7 +82,10 @@ class PesananController extends Controller
 			]);
 		}
 
-		$data = Pesanan::where('status', '1')->where('user_id', $request->user_id)->get();
+		$data = Pesanan::where('status', '1')
+        ->where('user_id', $request->user_id)
+        ->orderBy('created_at', 'desc')
+        ->get();
 
 		return response()->json([
 			'status'    => true,

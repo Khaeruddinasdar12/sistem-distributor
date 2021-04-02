@@ -27,6 +27,35 @@ Route::post('/admin/pesanan','Api\Admin\PesananController@index'); //list pesana
 Route::post('/admin/riwayat-pesanan','Api\Admin\PesananController@riwayat'); //list riwayat pesanan
 
 Route::post('/admin/konfirmasi-pesanan','Api\Admin\PesananController@konfirmasi'); //konfirmasi pesanan
+	//END TAB PESANAN
+
+
+	//TAB LAPORAN HARIAN
+	Route::post('/admin/laporan-harian','Api\Admin\LaporanHarianController@index'); //laporan harian
+	//END TAB LAPORAN HARIAN
+
+
+	//LAPORAN PANEN
+	Route::post('/admin/laporan-panen','Api\Admin\LaporanPanenController@index'); //laporan harian
+	//END LAPORAN PANEN
+
+
+	//DISTRIBUSI
+	Route::post('/admin/tambah-distribusi','Api\Admin\DistribusiController@store'); //tambah distribusi
+
+	Route::get('/admin/list-peternak','Api\Admin\DistribusiController@listPeternak'); //list peternak
+
+	Route::post('/admin/detail-peternak','Api\Admin\DistribusiController@detailPeternak'); //detail peternak
+	Route::post('/admin/detail-pakan','Api\Admin\DistribusiController@detailPakan'); //detail pakan
+	Route::post('/admin/detail-obat','Api\Admin\DistribusiController@detailObat'); //detail obat
+	
+	Route::post('/admin/distribusi-belum-terkonfirmasi','Api\Admin\DistribusiController@unConfirmed'); //list distribusi belum terkonfirmasi
+	Route::post('/admin/distribusi-sedang-berlangsung','Api\Admin\DistribusiController@sedangDistribusi'); //list distribusi belum terkonfirmasi
+	Route::post('/admin/riwayat-distribusi','Api\Admin\DistribusiController@riwayatDistribusi'); //list riwayat distribusi
+
+	Route::post('/admin/laporan-harian-distribusi','Api\Admin\DistribusiController@laporan'); //laporan harian berdasarkan distribusi
+	
+	//END DISTRIBUSI
 // END API ADMIN
 
 
