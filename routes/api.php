@@ -63,6 +63,30 @@ Route::post('/admin/konfirmasi-pesanan','Api\Admin\PesananController@konfirmasi'
 	Route::post('/admin/edit-pakan','Api\Admin\ProductController@editPakan'); //edit data pakan
 	Route::post('/admin/delete-pakan','Api\Admin\ProductController@deletePakan'); //hapus data pakan
 	//END PRODUCT
+
+
+	//MANAGE PETERNAK
+	Route::post('/admin/list-peternak-manage','Api\Admin\ManagePeternakController@listPeternak'); //list pengecer
+	Route::post('/admin/detail-peternak-manage','Api\Admin\ManagePeternakController@detailPeternak'); //detail pengecer
+	Route::post('/admin/tambah-peternak','Api\Admin\ManagePeternakController@tambahPeternak'); //tambah data peternak
+	Route::post('/admin/edit-peternak','Api\Admin\ManagePeternakController@editPeternak'); //edit data peternak
+	//END MANAGE PETERNAK
+
+
+	//MANAGE PENGECER
+	Route::post('/admin/list-pengecer','Api\Admin\ManagePengecerController@listPengecer'); //list pengecer
+	Route::post('/admin/detail-pengecer','Api\Admin\ManagePengecerController@detailPengecer'); //detail pengecer
+	Route::post('/admin/tambah-pengecer','Api\Admin\ManagePengecerController@tambahPengecer'); //tambah data pengecer
+	Route::post('/admin/edit-pengecer','Api\Admin\ManagePengecerController@editPengecer'); //edit data pengecer
+	//END MANAGE PENGECER
+
+
+	//MANAGE ADMIN
+	Route::post('/admin/list-admin','Api\Admin\ManageAdminController@listAdmin'); //list admin
+	Route::post('/admin/detail-admin','Api\Admin\ManageAdminController@detailAdmin'); //detail admin
+	Route::post('/admin/tambah-admin','Api\Admin\ManageAdminController@tambahAdmin'); //tambah data admin
+	Route::post('/admin/edit-admin','Api\Admin\ManageAdminController@editAdmin'); //edit data admin
+	//END MANAGE ADMIN
 // END API ADMIN
 
 

@@ -199,7 +199,7 @@ class DistribusiController extends Controller
 		if($cekPeternak == '') {
 			return response()->json([
 				'status'    => false,
-				'message'   => 'Id Peernak Tidak ditemukan'
+				'message'   => 'Id Peternak Tidak ditemukan'
 			]);
 		}
 		if($cekPeternak->role != 'peternak' ) {
