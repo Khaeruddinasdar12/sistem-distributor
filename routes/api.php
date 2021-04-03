@@ -54,8 +54,15 @@ Route::post('/admin/konfirmasi-pesanan','Api\Admin\PesananController@konfirmasi'
 	Route::post('/admin/riwayat-distribusi','Api\Admin\DistribusiController@riwayatDistribusi'); //list riwayat distribusi
 
 	Route::post('/admin/laporan-harian-distribusi','Api\Admin\DistribusiController@laporan'); //laporan harian berdasarkan distribusi
-	
 	//END DISTRIBUSI
+
+
+	//PRODUCT
+	Route::post('/admin/edit-obat','Api\Admin\ProductController@editObat'); //edit data obat
+	Route::post('/admin/delete-obat','Api\Admin\ProductController@deleteObat'); //hapus data obat
+	Route::post('/admin/edit-pakan','Api\Admin\ProductController@editPakan'); //edit data pakan
+	Route::post('/admin/delete-pakan','Api\Admin\ProductController@deletePakan'); //hapus data pakan
+	//END PRODUCT
 // END API ADMIN
 
 
