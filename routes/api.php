@@ -19,8 +19,14 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 // API ADMIN
-Route::post('/admin/login', 'Api\LoginAdminController@login'); //login admin
-Route::post('/admin/profile', 'Api\LoginAdminController@profile'); //profile admin
+Route::post('/admin/login', 'Api\Admin\LoginAdminController@login'); //login admin
+Route::post('/admin/profile', 'Api\Admin\LoginAdminController@profile'); //profile admin
+
+	//TAB PESANAN
+Route::post('/admin/pesanan','Api\Admin\PesananController@index'); //list pesanan
+Route::post('/admin/riwayat-pesanan','Api\Admin\PesananController@riwayat'); //list riwayat pesanan
+
+Route::post('/admin/konfirmasi-pesanan','Api\Admin\PesananController@konfirmasi'); //konfirmasi pesanan
 // END API ADMIN
 
 
@@ -34,12 +40,10 @@ Route::get('/list-pakan', 'Api\ObatPakanController@pakan'); //list obat
 Route::post('/pengecer/login', 'Api\LoginPengecerController@login'); //login pengecer
 Route::post('/pengecer/profile', 'Api\LoginPengecerController@profile'); //profile pengecer
 
-
 Route::post('/pengecer/tambah-pesanan', 'Api\PesananController@store'); //tambah pesanan
 Route::post('/pengecer/pesanan', 'Api\PesananController@list'); //list pesanan (belum konfirmasi)
 Route::post('/pengecer/riwayat-pesanan', 'Api\PesananController@listRiwayat'); //list riwayat pesanan (terkonfirmasi konfirmasi)
 // END PENGECER
-
 
 
 // PETERNAK
