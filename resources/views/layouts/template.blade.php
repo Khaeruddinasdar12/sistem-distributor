@@ -198,6 +198,7 @@
             </ul>
           </li>
 
+          <li class="nav-header">Manage Users</li>
           <li class="nav-item">
             <a href="{{route('manage.peternak')}}" class="nav-link {{ request()->is('admin/manage-peternak') ? 'active' : '' }}">
               <i class="nav-icon fas fa-user-tag"></i>

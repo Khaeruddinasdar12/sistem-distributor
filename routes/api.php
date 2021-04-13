@@ -27,6 +27,66 @@ Route::post('/admin/pesanan','Api\Admin\PesananController@index'); //list pesana
 Route::post('/admin/riwayat-pesanan','Api\Admin\PesananController@riwayat'); //list riwayat pesanan
 
 Route::post('/admin/konfirmasi-pesanan','Api\Admin\PesananController@konfirmasi'); //konfirmasi pesanan
+	//END TAB PESANAN
+
+
+	//TAB LAPORAN HARIAN
+	Route::post('/admin/laporan-harian','Api\Admin\LaporanHarianController@index'); //laporan harian
+	//END TAB LAPORAN HARIAN
+
+
+	//LAPORAN PANEN
+	Route::post('/admin/laporan-panen','Api\Admin\LaporanPanenController@index'); //laporan harian
+	//END LAPORAN PANEN
+
+
+	//DISTRIBUSI
+	Route::post('/admin/tambah-distribusi','Api\Admin\DistribusiController@store'); //tambah distribusi
+
+	Route::get('/admin/list-peternak','Api\Admin\DistribusiController@listPeternak'); //list peternak
+
+	Route::post('/admin/detail-peternak','Api\Admin\DistribusiController@detailPeternak'); //detail peternak
+	Route::post('/admin/detail-pakan','Api\Admin\DistribusiController@detailPakan'); //detail pakan
+	Route::post('/admin/detail-obat','Api\Admin\DistribusiController@detailObat'); //detail obat
+	
+	Route::post('/admin/distribusi-belum-terkonfirmasi','Api\Admin\DistribusiController@unConfirmed'); //list distribusi belum terkonfirmasi
+	Route::post('/admin/distribusi-sedang-berlangsung','Api\Admin\DistribusiController@sedangDistribusi'); //list distribusi belum terkonfirmasi
+	Route::post('/admin/riwayat-distribusi','Api\Admin\DistribusiController@riwayatDistribusi'); //list riwayat distribusi
+
+	Route::post('/admin/laporan-harian-distribusi','Api\Admin\DistribusiController@laporan'); //laporan harian berdasarkan distribusi
+	//END DISTRIBUSI
+
+
+	//PRODUCT
+	Route::post('/admin/edit-obat','Api\Admin\ProductController@editObat'); //edit data obat
+	Route::post('/admin/delete-obat','Api\Admin\ProductController@deleteObat'); //hapus data obat
+	Route::post('/admin/edit-pakan','Api\Admin\ProductController@editPakan'); //edit data pakan
+	Route::post('/admin/delete-pakan','Api\Admin\ProductController@deletePakan'); //hapus data pakan
+	//END PRODUCT
+
+
+	//MANAGE PETERNAK
+	Route::post('/admin/list-peternak-manage','Api\Admin\ManagePeternakController@listPeternak'); //list pengecer
+	Route::post('/admin/detail-peternak-manage','Api\Admin\ManagePeternakController@detailPeternak'); //detail pengecer
+	Route::post('/admin/tambah-peternak','Api\Admin\ManagePeternakController@tambahPeternak'); //tambah data peternak
+	Route::post('/admin/edit-peternak','Api\Admin\ManagePeternakController@editPeternak'); //edit data peternak
+	//END MANAGE PETERNAK
+
+
+	//MANAGE PENGECER
+	Route::post('/admin/list-pengecer','Api\Admin\ManagePengecerController@listPengecer'); //list pengecer
+	Route::post('/admin/detail-pengecer','Api\Admin\ManagePengecerController@detailPengecer'); //detail pengecer
+	Route::post('/admin/tambah-pengecer','Api\Admin\ManagePengecerController@tambahPengecer'); //tambah data pengecer
+	Route::post('/admin/edit-pengecer','Api\Admin\ManagePengecerController@editPengecer'); //edit data pengecer
+	//END MANAGE PENGECER
+
+
+	//MANAGE ADMIN
+	Route::post('/admin/list-admin','Api\Admin\ManageAdminController@listAdmin'); //list admin
+	Route::post('/admin/detail-admin','Api\Admin\ManageAdminController@detailAdmin'); //detail admin
+	Route::post('/admin/tambah-admin','Api\Admin\ManageAdminController@tambahAdmin'); //tambah data admin
+	Route::post('/admin/edit-admin','Api\Admin\ManageAdminController@editAdmin'); //edit data admin
+	//END MANAGE ADMIN
 // END API ADMIN
 
 

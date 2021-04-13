@@ -60,7 +60,7 @@ class DistribusiController extends Controller
         return Datatables::of($data)
         ->addColumn('action', function ($data) {
     		return "
-    		<a href ='#' class='btn btn-warning btn-xs'
+    		<a href ='/admin/laporan-harian/".$data->no_distribusi."' class='btn btn-warning btn-xs'
     		title='lihat laporan harian'
     		>
     		<i class='fa fa-eye'></i>
@@ -88,7 +88,7 @@ class DistribusiController extends Controller
         return Datatables::of($data)
         ->addColumn('action', function ($data) {
     		return "
-    		<a href ='#' class='btn btn-warning btn-xs'
+    		<a href ='/admin/laporan-harian/".$data->no_distribusi."' class='btn btn-warning btn-xs'
     		title='lihat laporan harian'
     		>
     		<i class='fa fa-eye'></i>
