@@ -22,11 +22,16 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('/admin/login', 'Api\Admin\LoginAdminController@login'); //login admin
 Route::post('/admin/profile', 'Api\Admin\LoginAdminController@profile'); //profile admin
 
-	//TAB PESANAN
-Route::post('/admin/pesanan','Api\Admin\PesananController@index'); //list pesanan
-Route::post('/admin/riwayat-pesanan','Api\Admin\PesananController@riwayat'); //list riwayat pesanan
+	// DASHBOARD
+	Route::post('/admin/dashboard','Api\Admin\DashboardController@index'); //dashboard	
+	// END DASHBOARD
 
-Route::post('/admin/konfirmasi-pesanan','Api\Admin\PesananController@konfirmasi'); //konfirmasi pesanan
+
+	//TAB PESANAN
+	Route::post('/admin/pesanan','Api\Admin\PesananController@index'); //list pesanan
+	Route::post('/admin/riwayat-pesanan','Api\Admin\PesananController@riwayat'); //list riwayat pesanan
+
+	Route::post('/admin/konfirmasi-pesanan','Api\Admin\PesananController@konfirmasi'); //konfirmasi pesanan
 	//END TAB PESANAN
 
 
