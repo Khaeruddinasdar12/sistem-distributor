@@ -36,7 +36,7 @@ class ManagePeternakController extends Controller
 			$message = $validator->messages()->first();
 			return response()->json([
 				'status' => false,
-				'messsage' => $message
+				'message' => $message
 			]);
 		}
 		
@@ -65,7 +65,7 @@ class ManagePeternakController extends Controller
 			$message = $validator->messages()->first();
 			return response()->json([
 				'status' => false,
-				'messsage' => $message
+				'message' => $message
 			]);
 		}
 		
@@ -115,7 +115,7 @@ class ManagePeternakController extends Controller
 			$message = $validator->messages()->first();
 			return response()->json([
 				'status' => false,
-				'messsage' => $message
+				'message' => $message
 			]);
 		}
 		
@@ -155,7 +155,7 @@ class ManagePeternakController extends Controller
 			$message = $validator->messages()->first();
 			return response()->json([
 				'status' => false,
-				'messsage' => $message
+				'message' => $message
 			]);
 		}
 		
@@ -168,7 +168,7 @@ class ManagePeternakController extends Controller
 		if($data == '') {
 			return response()->json([
 				'status' => false,
-				'messsage' => 'Id peternak tidak ditemukan'
+				'message' => 'Id peternak tidak ditemukan'
 			]);
 		}	
 
@@ -180,7 +180,7 @@ class ManagePeternakController extends Controller
 			if($request->password != $request->password_confirmation) {
 				return response()->json([
 					'status' => false,
-					'messsage' => 'password confirmation tidak sama'
+					'message' => 'password confirmation tidak sama'
 				]);
 			}
 			$data->password = bcrypt($request->password);
@@ -189,7 +189,7 @@ class ManagePeternakController extends Controller
 
 		return response()->json([
 			'status' => true,
-			'messsage' => 'berhasil mengubah data peternak'
+			'message' => 'berhasil mengubah data peternak'
 		]);
 
 	}

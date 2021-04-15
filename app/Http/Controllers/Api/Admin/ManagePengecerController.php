@@ -36,7 +36,7 @@ class ManagePengecerController extends Controller
 			$message = $validator->messages()->first();
 			return response()->json([
 				'status' => false,
-				'messsage' => $message
+				'message' => $message
 			]);
 		}
 		
@@ -65,7 +65,7 @@ class ManagePengecerController extends Controller
 			$message = $validator->messages()->first();
 			return response()->json([
 				'status' => false,
-				'messsage' => $message
+				'message' => $message
 			]);
 		}
 		
@@ -115,7 +115,7 @@ class ManagePengecerController extends Controller
 			$message = $validator->messages()->first();
 			return response()->json([
 				'status' => false,
-				'messsage' => $message
+				'message' => $message
 			]);
 		}
 		
@@ -135,7 +135,7 @@ class ManagePengecerController extends Controller
 
 		return response()->json([
 			'status' => true,
-			'messsage' => 'Berhasil menambah data pengecer'
+			'message' => 'Berhasil menambah data pengecer'
 		]);
 
 	}
@@ -155,7 +155,7 @@ class ManagePengecerController extends Controller
 			$message = $validator->messages()->first();
 			return response()->json([
 				'status' => false,
-				'messsage' => $message
+				'message' => $message
 			]);
 		}
 		
@@ -168,7 +168,7 @@ class ManagePengecerController extends Controller
 		if($data == '') {
 			return response()->json([
 				'status' => false,
-				'messsage' => 'Id pengecer tidak ditemukan'
+				'message' => 'Id pengecer tidak ditemukan'
 			]);
 		}
 
@@ -187,7 +187,7 @@ class ManagePengecerController extends Controller
 			if($request->password != $request->password_confirmation) {
 				return response()->json([
 					'status' => false,
-					'messsage' => 'password confirmation tidak sama'
+					'message' => 'password confirmation tidak sama'
 				]);
 			}
 			$data->password = bcrypt($request->password);
@@ -196,7 +196,7 @@ class ManagePengecerController extends Controller
 
 		return response()->json([
 			'status' => true,
-			'messsage' => 'berhasil mengubah data pengecer'
+			'message' => 'berhasil mengubah data pengecer'
 		]);
 
 	}
