@@ -15,7 +15,7 @@ class CreateLaporanHariansTable extends Migration
     {
         Schema::create('laporan_harians', function (Blueprint $table) {
             $table->id();
-            $table->integer('distribusi_id');
+            $table->bigInteger('distribusi_id')->unsigned();
             $table->integer('jumlah_ayam');
             $table->integer('umur_ayam');
             $table->integer('total_kematian');
@@ -24,6 +24,8 @@ class CreateLaporanHariansTable extends Migration
             $table->integer('total_pakan_terpakai');
             $table->integer('stok_pakan');
             $table->timestamps();
+
+            $table->foreign('distribusi_id')->references('id')->on('distribusis');
         });
     }
 

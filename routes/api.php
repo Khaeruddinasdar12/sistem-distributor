@@ -37,6 +37,8 @@ Route::post('/admin/profile', 'Api\Admin\LoginAdminController@profile'); //profi
 
 	//TAB LAPORAN HARIAN
 	Route::post('/admin/laporan-harian','Api\Admin\LaporanHarianController@index'); //laporan harian
+	// Route::post('/admin/laporan-harian-distribusi','Api\Admin\LaporanHarianController@detailDistribusi'); //detail distribusi
+	
 	//END TAB LAPORAN HARIAN
 
 
