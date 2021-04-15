@@ -27,6 +27,36 @@ class ProductController extends Controller
 		return true;
 	}
 
+	public function detailObat(Request $request)
+	{
+		$validator = Validator::make($request->all(), [
+			'admin_id'	=> 'required|numeric',
+			'obat_id'	=> 'required|numeric',
+		]);
+
+		if($validator->fails()) {
+			$message = $validator->messages()->first();
+			return response()->json([
+				'status' => false,
+				'messsage' => $message
+			]);
+		}
+		
+		if($this->login($request->admin_id) == false) {
+			return $this->error;
+		}
+
+		$data = Obat::find($request->obat_id);
+		return response()->json([
+			'status' => true,
+			'messsage' => 'detail obat',
+			'id'	=> $data->id,
+			'nama'	=> $data->nama,
+			'stok'	=> $data->stok,
+			'harga'	=> $data->harga,
+		]);
+	}
+
 	public function editObat(Request $request) //edit data obat
 	{
 		$validator = Validator::make($request->all(), [
@@ -99,6 +129,36 @@ class ProductController extends Controller
 		return response()->json([
 			'status'    => true,
 			'message'   => 'Berhasil menghapus data obat'
+		]);
+	}
+
+	public function detailPakan(Request $request)
+	{
+		$validator = Validator::make($request->all(), [
+			'admin_id'	=> 'required|numeric',
+			'pakan_id'	=> 'required|numeric',
+		]);
+
+		if($validator->fails()) {
+			$message = $validator->messages()->first();
+			return response()->json([
+				'status' => false,
+				'messsage' => $message
+			]);
+		}
+		
+		if($this->login($request->admin_id) == false) {
+			return $this->error;
+		}
+
+		$data = Pakan::find($request->pakan_id);
+		return response()->json([
+			'status' => true,
+			'messsage' => 'detail pakan',
+			'id'	=> $data->id,
+			'nama'	=> $data->nama,
+			'stok'	=> $data->stok,
+			'harga'	=> $data->harga,
 		]);
 	}
 

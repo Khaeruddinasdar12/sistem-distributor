@@ -66,8 +66,10 @@ Route::post('/admin/profile', 'Api\Admin\LoginAdminController@profile'); //profi
 
 	//PRODUCT
 	Route::post('/admin/edit-obat','Api\Admin\ProductController@editObat'); //edit data obat
+	Route::post('/admin/detail-obat','Api\Admin\ProductController@detailObat'); //detail data obat
 	Route::post('/admin/delete-obat','Api\Admin\ProductController@deleteObat'); //hapus data obat
 	Route::post('/admin/edit-pakan','Api\Admin\ProductController@editPakan'); //edit data pakan
+	Route::post('/admin/detail-pakan','Api\Admin\ProductController@detailPakan'); //detail data obat
 	Route::post('/admin/delete-pakan','Api\Admin\ProductController@deletePakan'); //hapus data pakan
 	//END PRODUCT
 
