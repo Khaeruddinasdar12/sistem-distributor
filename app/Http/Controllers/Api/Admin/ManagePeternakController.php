@@ -135,7 +135,7 @@ class ManagePeternakController extends Controller
 
 		return response()->json([
 			'status' => true,
-			'messsage' => 'berhasil menambah data peternak'
+			'message' => 'berhasil menambah data peternak'
 		]);
 
 	}

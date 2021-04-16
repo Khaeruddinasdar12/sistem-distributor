@@ -55,7 +55,7 @@ class DistribusiController extends Controller
 		->get();
 
 		return response()->json([
-			'status' => false,
+			'status' => true,
 			'messsage' => 'laporan harian berdasarkan distribusi id',
 			'data' => $data
 		]);
@@ -91,7 +91,7 @@ class DistribusiController extends Controller
 		->get();
 
 		return response()->json([
-			'status' => false,
+			'status' => true,
 			'messsage' => 'list distribusi belum terkonfirmasi',
 			'data' => $data
 		]);
@@ -126,7 +126,7 @@ class DistribusiController extends Controller
 		->get();
 
 		return response()->json([
-			'status' => false,
+			'status' => true,
 			'messsage' => 'list distribusi sedang berlangsung',
 			'data' => $data
 		]);
@@ -161,7 +161,7 @@ class DistribusiController extends Controller
 		->get();
 
 		return response()->json([
-			'status' => false,
+			'status' => true,
 			'messsage' => 'list riwayat distribusi',
 			'data' => $data
 		]);
