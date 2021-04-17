@@ -351,6 +351,45 @@ class DistribusiController extends Controller
 		]); 
 	}
 
+	public function deleteUnConfirmed(Request $request)
+	{
+		$validator = Validator::make($request->all(), [
+			'admin_id'		=> 'required|numeric',
+			'distribusi_id'	=> 'required|numeric',
+		]);
+
+		if($validator->fails()) {
+			$message = $validator->messages()->first();
+			return response()->json([
+				'status' => false,
+				'messsage' => $message
+			]);
+		}
+
+		$data = Distribusi::find($request->distribusi_id);
+
+		if($data == '') {
+			return response()->json([
+				'status'    => false,
+				'message'   => 'Id Tidak ditemukan'
+			]);
+		}
+
+		if($data->status != '0' && $data->open != '0') {
+			return response()->json([
+				'status'    => false,
+				'message'   => 'Data distribusi ini telah terkonfirmasi'
+			]);
+		}
+
+		$data->delete();
+
+		return response()->json([
+			'status'    => true,
+			'message'   => 'berhasil menghapus data distribusi belum terkonfirmasi'
+		]);
+	}
+
 	public function detailPakan(Request $request) // detail pakan
 	{
 		$validator = Validator::make($request->all(), [

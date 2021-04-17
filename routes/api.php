@@ -56,6 +56,7 @@ Route::post('/admin/profile', 'Api\Admin\LoginAdminController@profile'); //profi
 	Route::post('/admin/detail-pakan','Api\Admin\DistribusiController@detailPakan'); //detail pakan
 	Route::post('/admin/detail-obat','Api\Admin\DistribusiController@detailObat'); //detail obat
 	
+	Route::post('/admin/delete-distribusi-belum-terkonfirmasi','Api\Admin\DistribusiController@deleteUnConfirmed'); //DELETE distribusi belum terkonfirmasi
 	Route::post('/admin/distribusi-belum-terkonfirmasi','Api\Admin\DistribusiController@unConfirmed'); //list distribusi belum terkonfirmasi
 	Route::post('/admin/distribusi-sedang-berlangsung','Api\Admin\DistribusiController@sedangDistribusi'); //list distribusi belum terkonfirmasi
 	Route::post('/admin/riwayat-distribusi','Api\Admin\DistribusiController@riwayatDistribusi'); //list riwayat distribusi
