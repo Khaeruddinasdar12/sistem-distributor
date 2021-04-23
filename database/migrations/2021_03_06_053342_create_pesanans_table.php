@@ -20,8 +20,7 @@ class CreatePesanansTable extends Migration
             $table->integer('jumlah_ayam');
             $table->enum('status', ['0', '1']); // 0 belum tereksekusi, 1 tereksekusi
             $table->timestamps();
-
-            $table->foreign('user_id')->references('id')->on('users'); 
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');; 
         });
     }
 

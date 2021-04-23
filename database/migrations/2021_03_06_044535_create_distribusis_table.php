@@ -27,9 +27,9 @@ class CreateDistribusisTable extends Migration
             $table->integer('admin_id');
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('obat_id')->references('id')->on('obats');
-            $table->foreign('pakan_id')->references('id')->on('pakans');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');;
+            $table->foreign('obat_id')->references('id')->on('obats')->onDelete('cascade');
+            $table->foreign('pakan_id')->references('id')->on('pakans')->onDelete('cascade');;
         });
     }
 

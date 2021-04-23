@@ -25,7 +25,7 @@ class CreateLaporanHariansTable extends Migration
             $table->integer('stok_pakan');
             $table->timestamps();
 
-            $table->foreign('distribusi_id')->references('id')->on('distribusis');
+            $table->foreign('distribusi_id')->references('id')->on('distribusis')->onDelete('cascade');;
         });
     }
 
