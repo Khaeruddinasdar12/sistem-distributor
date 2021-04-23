@@ -191,6 +191,48 @@ Manage Peternak
   modal.find('.modal-body #alamat').val(alamat)
 })
 
+  function hapus_data() { // menghapus data peternak
+   $(document).on('click', '#del_id', function(){
+    Swal.fire({
+      title: 'Anda Yakin ?',
+      text: "Anda tidak dapat mengembalikan data yang telah di hapus!",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Ya, Lanjutkan Hapus!',
+      timer: 6500
+    }).then((result) => {
+      if (result.value) {
+        var me = $(this),
+        url = me.attr('href'),
+        token = $('meta[name="csrf-token"]').attr('content');
+        $.ajax({
+          url: url,
+          method: "POST",
+          data : {
+            '_method' : 'DELETE',
+            '_token'  : token
+          },
+          success:function(data){
+            $('#tabel_admin').DataTable().ajax.reload();
+            berhasil(data.status, data.pesan);
+            // $('#table_admin').DataTable().ajax.reload();
+          },
+          error: function(xhr, status, error){
+            var error = xhr.responseJSON; 
+            if ($.isEmptyObject(error) == false) {
+              $.each(error.errors, function(key, value) {
+                gagal(key, value);
+              });
+            }
+          } 
+        });
+      }
+    });
+  });
+ }
+
   function berhasil(status, pesan) {
     Swal.fire({
       type: status,

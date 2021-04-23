@@ -112,6 +112,21 @@ class DistribusiController extends Controller
         return Datatables::of($data)
         ->addColumn('action', function ($data) {
     		return "
+            <a class='btn btn-success btn-xs'
+            data-toggle='modal' 
+            data-target='#modal-edit-data'
+            title='edit pengecer' 
+            href='edit-distribusi'
+            data-user_id='".$data->user_id."'
+            data-pakan_id='".$data->pakan_id."'
+            data-obat_id='".$data->obat_id."'
+            data-jumlah_ayam='".$data->jumlah_ayam."'
+            data-jumlah_obat='".$data->jumlah_obat."'
+            data-jumlah_pakan='".$data->jumlah_pakan."'
+            >
+            <i class='fa fa-edit'></i>
+            </a>
+
     		<button class='btn btn-danger btn-xs'
     		title='hapus obat'
     		id='del_id' 

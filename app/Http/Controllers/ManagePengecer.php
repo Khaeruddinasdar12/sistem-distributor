@@ -87,6 +87,22 @@ class ManagePengecer extends Controller
 		);
 	}
 
+    public function delete($id) // delete pengecer
+    {
+        $data = User::findOrFail($id);
+        if($data->role != 'pengecer') {
+            return $arrayName = array(
+                'status'    => 'error',
+                'pesan'     => 'User ini bukan pengecer, user ini peternak'
+            );
+        }
+        $data->delete();
+        return $arrayName = array(
+            'status'    => 'success',
+            'pesan'     => 'Berhasil Menghapus Data Pengecer'
+        );
+    }
+
     public function table() // api table user (role pengecer) untuk datatable
     {
     	$data = User::select('id', 'name', 'noktp', 'email', 'nohp', 'alamat')
@@ -110,7 +126,16 @@ class ManagePengecer extends Controller
     		data-alamat='".$data->alamat."'
     		>
     		<i class='fa fa-user-edit'></i>
-    		</a>";
+    		</a>
+
+            <button class='btn btn-danger btn-xs'
+            title='Hapus Pengecer' 
+            href='manage-pengecer/".$data->id."'
+            onclick='hapus_data()'
+            id='del_id'
+            >
+            <i class='fa fa-trash'></i>
+            </button>";
     	})
     	->addIndexColumn() 
     	->make(true);

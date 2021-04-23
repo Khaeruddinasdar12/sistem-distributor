@@ -9,14 +9,14 @@ use DataTables;
 class ManagePeternak extends Controller
 {
     public function __construct()
-	{
-		$this->middleware('auth:admin');
-	}
+    {
+      $this->middleware('auth:admin');
+  }
 
-	public function index()
-	{
-		return view('manage-peternak.index');
-	}
+  public function index()
+  {
+      return view('manage-peternak.index');
+  }
 
     public function store(Request $request) // tambah data peternak
     {	
@@ -87,6 +87,22 @@ class ManagePeternak extends Controller
 		);
 	}
 
+    public function delete($id) // delete peterenak
+    {
+        $data = User::findOrFail($id);
+        if($data->role != 'peternak') {
+            return $arrayName = array(
+                'status'    => 'error',
+                'pesan'     => 'User ini bukan peternak, user ini pengecer'
+            );
+        }
+        $data->delete();
+        return $arrayName = array(
+            'status'    => 'success',
+            'pesan'     => 'Berhasil Menghapus Data Peternak'
+        );
+    }
+
     public function table() // api table user (role pengecer) untuk datatable
     {
     	$data = User::select('id', 'name', 'noktp', 'email', 'nohp', 'alamat')
@@ -110,7 +126,16 @@ class ManagePeternak extends Controller
     		data-alamat='".$data->alamat."'
     		>
     		<i class='fa fa-user-edit'></i>
-    		</a>";
+    		</a>
+
+            <button class='btn btn-danger btn-xs'
+            title='Hapus Peternak' 
+            href='manage-peternak/".$data->id."'
+            onclick='hapus_data()'
+            id='del_id'
+            >
+            <i class='fa fa-trash'></i>
+            </button>";
     	})
     	->addIndexColumn() 
     	->make(true);

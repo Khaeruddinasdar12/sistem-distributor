@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Validator;
 
 class ManagePengecerController extends Controller
 {
-    private $admin;
+	private $admin;
 	private $error;
 
 	public function login($id)
@@ -136,6 +136,48 @@ class ManagePengecerController extends Controller
 		return response()->json([
 			'status' => true,
 			'message' => 'Berhasil menambah data pengecer'
+		]);
+
+	}
+
+	public function deletePengecer(Request $request) //menghapus data pengecer
+	{
+		$validator = Validator::make($request->all(), [
+			'admin_id'	=> 'required|numeric',
+			'pengecer_id'	=> 'required|numeric',
+		]);
+
+		if($validator->fails()) {
+			$message = $validator->messages()->first();
+			return response()->json([
+				'status' => false,
+				'message' => $message
+			]);
+		}
+		
+		if($this->login($request->admin_id) == false) {
+			return $this->error;
+		}
+
+		$data = User::find($request->pengecer_id);
+		if($data == '') {
+			return response()->json([
+				'status' => false,
+				'message' => 'Id user pengecer tidak ditemukan'
+			]);
+		} 
+
+		if($data->role != 'pengecer') {
+			return response()->json([
+				'status' => false,
+				'message' => 'User ini pengecer, user ini peternak'
+			]);
+		}
+		$data->delete();
+
+		return response()->json([
+			'status' => true,
+			'message' => 'Berhasil menghapus data pengecer'
 		]);
 
 	}

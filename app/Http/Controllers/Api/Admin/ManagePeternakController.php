@@ -140,6 +140,48 @@ class ManagePeternakController extends Controller
 
 	}
 
+	public function deletePeternak(Request $request) //menghapus data peternak
+	{
+		$validator = Validator::make($request->all(), [
+			'admin_id'	=> 'required|numeric',
+			'peternak_id'	=> 'required|numeric',
+		]);
+
+		if($validator->fails()) {
+			$message = $validator->messages()->first();
+			return response()->json([
+				'status' => false,
+				'message' => $message
+			]);
+		}
+		
+		if($this->login($request->admin_id) == false) {
+			return $this->error;
+		}
+
+		$data = User::find($request->peternak_id);
+		if($data == '') {
+			return response()->json([
+				'status' => false,
+				'message' => 'Id user peternak tidak ditemukan'
+			]);
+		} 
+
+		if($data->role != 'peternak') {
+			return response()->json([
+				'status' => false,
+				'message' => 'User ini peternak, user ini pengecer'
+			]);
+		}
+		$data->delete();
+
+		return response()->json([
+			'status' => true,
+			'message' => 'Berhasil menghapus data pengecer'
+		]);
+
+	}
+
 	public function editPeternak(Request $request) //mengubah data peternak
 	{
 		$validator = Validator::make($request->all(), [

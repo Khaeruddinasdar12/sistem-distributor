@@ -56,7 +56,8 @@ Route::prefix('admin')->group(function() {
 	Route::get('/table-riwayat-distribusi','DistribusiController@tableRiwayat')->name('table.distribusi.riwayat'); //table api riwayat distribusi
 
 	Route::get('/tambah-distribusi','DistribusiController@tambah')->name('distribusi.tambah'); //halaman tambah distribusi
-	Route::post('/tambah-distribusi','DistribusiController@store')->name('distribusi.tambah.store');
+	Route::post('/tambah-distribusi','DistribusiController@store')->name('distribusi.tambah.store'); // tambah distribusi post
+	Route::post('/update-distribusi','DistribusiController@update')->name('distribusi.update.store'); //update atau edit distribusi belum terkonfirmasi
 	Route::get('/sedang-distribusi','DistribusiController@sedang')->name('distribusi.sedang'); //halaman sedang distribusi (sedang berlangsung)
 	Route::get('/riwayat-distribusi','DistribusiController@riwayat')->name('distribusi.riwayat'); //halaman sedang distribusi (sedang berlangsung)
 
@@ -90,6 +91,7 @@ Route::prefix('admin')->group(function() {
 	Route::get('/manage-peternak','ManagePeternak@index')->name('manage.peternak');
 	Route::post('/manage-peternak','ManagePeternak@store')->name('manage.peternak.store');
 	Route::put('/manage-peternak','ManagePeternak@update')->name('manage.peternak.update');
+	Route::delete('/manage-peternak/{id}','ManagePeternak@delete')->name('manage.peternak.delete');
 	// END MANAGE PETERNAK
 
 
@@ -99,6 +101,7 @@ Route::prefix('admin')->group(function() {
 	Route::get('/manage-pengecer','ManagePengecer@index')->name('manage.pengecer');
 	Route::post('/manage-pengecer','ManagePengecer@store')->name('manage.pengecer.store');
 	Route::put('/manage-pengecer','ManagePengecer@update')->name('manage.pengecer.update');
+	Route::delete('/manage-pengecer/{id}','ManagePengecer@delete')->name('manage.pengecer.delete');
 	// END MANAGE PENGECER
 
 

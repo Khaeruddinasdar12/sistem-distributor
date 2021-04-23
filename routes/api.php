@@ -80,6 +80,7 @@ Route::post('/admin/profile', 'Api\Admin\LoginAdminController@profile'); //profi
 	Route::post('/admin/detail-peternak-manage','Api\Admin\ManagePeternakController@detailPeternak'); //detail pengecer
 	Route::post('/admin/tambah-peternak','Api\Admin\ManagePeternakController@tambahPeternak'); //tambah data peternak
 	Route::post('/admin/edit-peternak','Api\Admin\ManagePeternakController@editPeternak'); //edit data peternak
+	Route::post('/admin/delete-peternak','Api\Admin\ManagePeternakController@deletePeternak'); //edit data peternak
 	//END MANAGE PETERNAK
 
 
@@ -88,6 +89,7 @@ Route::post('/admin/profile', 'Api\Admin\LoginAdminController@profile'); //profi
 	Route::post('/admin/detail-pengecer','Api\Admin\ManagePengecerController@detailPengecer'); //detail pengecer
 	Route::post('/admin/tambah-pengecer','Api\Admin\ManagePengecerController@tambahPengecer'); //tambah data pengecer
 	Route::post('/admin/edit-pengecer','Api\Admin\ManagePengecerController@editPengecer'); //edit data pengecer
+	Route::post('/admin/delete-pengecer','Api\Admin\ManagePengecerController@deletePengecer'); //edit data pengecer
 	//END MANAGE PENGECER
 
 

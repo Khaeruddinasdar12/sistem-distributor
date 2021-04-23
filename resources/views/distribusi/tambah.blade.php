@@ -19,141 +19,264 @@ Tambah Distribusi
         <!-- /.card-header -->
         <div class="card-body">
           <!-- tambah distribusi -->
-            <div class="card">
-              <div class="card-body">
-               <div class="float-left">
-                <h4 >Form Tambah Distribusi</h4>
-              </div>
-              <form id="add-distribusi" method="post">
-                @csrf
-                <div class="float-right">
-                  <button class="btn btn-primary"><i class="fa fa-plus"></i> Tambah Distribusi</button>
-                </div> 
-                <br>
-                <br>
-                <div class="row">
-                  <div class="col-4">
-                    <div class="card">
-                      <div class="card-body">
-                        <div class="form-group">
-                          <label class="col-form-label">Nama Peternak:</label>
-                          <select class="form-control" id="peternak" name="id_peternak">
-                            <option>Pilih Peternak</option>
-                            @foreach($peternak as $data)
-                            <option value="{{$data->id}}">{{$data->name}} ID {{$data->id}}</option>
-                            @endforeach
-                          </select>
-                        </div>
-                        <h6>Keterangan peternak:</h6>
-                        <ul>
-                          <li id="ket_nama">Nama : </li>
-                          <li id="ket_nohp">No HP : </li>
-                          <li id="ket_alamat">Alamat : </li>
-                          <li id="ket_email">Email : </li>
-                          <li id="ket_ktp">No KTP : </li>
-                        </ul>
-                        <div class="form-group">
-                          <label class="col-form-label">Jumlah Ayam (Ekor):</label>
-                          <input type="text" class="form-control" name="jumlah_ayam">
-                        </div>
+          <div class="card">
+            <div class="card-body">
+             <div class="float-left">
+              <h4 >Form Tambah Distribusi</h4>
+            </div>
+            <form id="add-distribusi" method="post">
+              @csrf
+              <div class="float-right">
+                <button class="btn btn-primary"><i class="fa fa-plus"></i> Tambah Distribusi</button>
+              </div> 
+              <br>
+              <br>
+              <div class="row">
+                <div class="col-4">
+                  <div class="card">
+                    <div class="card-body">
+                      <div class="form-group">
+                        <label class="col-form-label">Nama Peternak:</label>
+                        <select class="form-control" id="peternak" name="id_peternak">
+                          <option>Pilih Peternak</option>
+                          @foreach($peternak as $data)
+                          <option value="{{$data->id}}">{{$data->name}} ID {{$data->id}}</option>
+                          @endforeach
+                        </select>
                       </div>
-                    </div>
-                  </div>
-                  <div class="col-4">
-                    <div class="card">
-                      <div class="card-body">
-                        <div class="form-group">
-                          <label class="col-form-label">Nama Pakan:</label>
-                          <select class="form-control" id="pakan" name="id_pakan">
-                            <option>Pilih Pakan</option>
-                            @foreach($pakan as $data)
-                            <option value="{{$data->id}}">{{$data->nama}}</option>
-                            @endforeach
-                          </select>
-                        </div>
-                        <h6>Keterangan pakan:</h6>
-                        <ul>
-                          <li id="nama_pakan">Nama Pakan : </li>
-                          <li id="stok_pakan">Stok : </li>
-                          <br>
-                          <br>
-                          <br>
-                        </ul>
-                        <div class="form-group">
-                          <label class="col-form-label">Jumlah Pakan (Bungkus):</label>
-                          <input type="text" class="form-control" name="jumlah_pakan">
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-4">
-                    <div class="card">
-                      <div class="card-body">
-                        <div class="form-group">
-                          <label class="col-form-label">Nama Obat:</label>
-                          <select class="form-control" id="obat" name="id_obat">
-                            <option>Pilih Obat</option>
-                            @foreach($obat as $data)
-                            <option value="{{$data->id}}">{{$data->nama}}</option>
-                            @endforeach
-                          </select>
-                        </div>
-                        <h6>Keterangan obat:</h6>
-                        <ul>
-                          <li id="nama_obat">Nama Obat : </li>
-                          <li id="stok_obat">Stok : </li>
-                          <br>
-                          <br>
-                          <br>
-                        </ul>
-                        <div class="form-group">
-                          <label class="col-form-label">Jumlah Obat (Bungkus):</label>
-                          <input type="text" class="form-control" name="jumlah_obat">
-                        </div>
+                      <h6>Keterangan peternak:</h6>
+                      <ul>
+                        <li id="ket_nama">Nama : </li>
+                        <li id="ket_nohp">No HP : </li>
+                        <li id="ket_alamat">Alamat : </li>
+                        <li id="ket_email">Email : </li>
+                        <li id="ket_ktp">No KTP : </li>
+                      </ul>
+                      <div class="form-group">
+                        <label class="col-form-label">Jumlah Ayam (Ekor):</label>
+                        <input type="text" class="form-control" name="jumlah_ayam">
                       </div>
                     </div>
                   </div>
                 </div>
-              </form>
-            </div>
+                <div class="col-4">
+                  <div class="card">
+                    <div class="card-body">
+                      <div class="form-group">
+                        <label class="col-form-label">Nama Pakan:</label>
+                        <select class="form-control" id="pakan" name="id_pakan">
+                          <option>Pilih Pakan</option>
+                          @foreach($pakan as $data)
+                          <option value="{{$data->id}}">{{$data->nama}}</option>
+                          @endforeach
+                        </select>
+                      </div>
+                      <h6>Keterangan pakan:</h6>
+                      <ul>
+                        <li id="nama_pakan">Nama Pakan : </li>
+                        <li id="stok_pakan">Stok : </li>
+                        <br>
+                        <br>
+                        <br>
+                      </ul>
+                      <div class="form-group">
+                        <label class="col-form-label">Jumlah Pakan (Bungkus):</label>
+                        <input type="text" class="form-control" name="jumlah_pakan">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="card">
+                    <div class="card-body">
+                      <div class="form-group">
+                        <label class="col-form-label">Nama Obat:</label>
+                        <select class="form-control" id="obat" name="id_obat">
+                          <option>Pilih Obat</option>
+                          @foreach($obat as $data)
+                          <option value="{{$data->id}}">{{$data->nama}}</option>
+                          @endforeach
+                        </select>
+                      </div>
+                      <h6>Keterangan obat:</h6>
+                      <ul>
+                        <li id="nama_obat">Nama Obat : </li>
+                        <li id="stok_obat">Stok : </li>
+                        <br>
+                        <br>
+                        <br>
+                      </ul>
+                      <div class="form-group">
+                        <label class="col-form-label">Jumlah Obat (Bungkus):</label>
+                        <input type="text" class="form-control" name="jumlah_obat">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
           </div>
-          <!-- end tambah distribusi -->
+        </div>
+        <!-- end tambah distribusi -->
 
-          <div class="card">
-            <div class="card-body">
-             <div class="float-left">
-              <h4 >Daftar Distribusi Belum Terkonfirmasi</h4>
-            </div>
+        <div class="card">
+          <div class="card-body">
+           <div class="float-left">
+            <h4 >Daftar Distribusi Belum Terkonfirmasi</h4>
+          </div>
 
-            <div class="table-responsive-sm">
-              <table id="tabel_admin" class="table table-bordered" style="width:100% !important; ">
-                <thead>
-                  <tr>
-                    <th>No.</th>
-                    <th>No Distribusi</th>
-                    <th>Peternak</th>
-                    <th>Alamat</th>
-                    <th>Nama Obat</th>
-                    <th>Jumlah Obat (Bungkus)</th>
-                    <th>Nama Pakan</th>
-                    <th>Jumlah Pakan (Bungkus)</th>
-                    <th>Jumlah Ayam (Ekor)</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>  
-              </table>
-            </div>
+          <div class="table-responsive-sm">
+            <table id="tabel_admin" class="table table-bordered" style="width:100% !important; ">
+              <thead>
+                <tr>
+                  <th>No.</th>
+                  <th>No Distribusi</th>
+                  <th>Peternak</th>
+                  <th>Alamat</th>
+                  <th>Nama Obat</th>
+                  <th>Jumlah Obat (Bungkus)</th>
+                  <th>Nama Pakan</th>
+                  <th>Jumlah Pakan (Bungkus)</th>
+                  <th>Jumlah Ayam (Ekor)</th>
+                  <th>Action</th>
+                </tr>
+              </thead>  
+            </table>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+</div>
 </section>
+
+<!-- MODAL -->
+<div class="modal fade" id="modal-edit-data" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-4">
+            <div class="card">
+              <div class="card-body">
+                <div class="form-group">
+                  <label class="col-form-label">Nama Peternak:</label>
+                  <select class="form-control" id="detail_peternak" name="id_peternak">
+                    <option>Pilih Peternak</option>
+                    @foreach($peternak as $data)
+                    <option value="{{$data->id}}">{{$data->name}} ID {{$data->id}}</option>
+                    @endforeach
+                  </select>
+                </div>
+                <h6>Keterangan peternak:</h6>
+                <ul>
+                  <li id="detail_ket_nama">Nama : </li>
+                  <li id="detail_ket_nohp">No HP : </li>
+                  <li id="detail_ket_alamat">Alamat : </li>
+                  <li id="detail_ket_email">Email : </li>
+                  <li id="detail_ket_ktp">No KTP : </li>
+                </ul>
+                <div class="form-group">
+                  <label class="col-form-label">Jumlah Ayam (Ekor):</label>
+                  <input type="text" class="form-control" id="detail_jumlah_pakan" name="jumlah_ayam">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="card">
+              <div class="card-body">
+                <div class="form-group">
+                  <label class="col-form-label">Nama Pakan:</label>
+                  <select class="form-control" id="detail_pakan" name="id_pakan">
+                    <option>Pilih Pakan</option>
+                    @foreach($pakan as $data)
+                    <option value="{{$data->id}}">{{$data->nama}}</option>
+                    @endforeach
+                  </select>
+                </div>
+                <h6>Keterangan pakan:</h6>
+                <ul>
+                  <li id="detail_nama_pakan">Nama Pakan : </li>
+                  <li id="detail_stok_pakan">Stok : </li>
+                  <br>
+                  <br>
+                  <br>
+                </ul>
+                <div class="form-group">
+                  <label class="col-form-label">Jumlah Pakan (Bungkus):</label>
+                  <input type="text" class="form-control" id="detail_jumlah_pakan" name="jumlah_pakan">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="card">
+              <div class="card-body">
+                <div class="form-group">
+                  <label class="col-form-label">Nama Obat:</label>
+                  <select class="form-control" id="detail_obat" name="id_obat">
+                    <option>Pilih Obat</option>
+                    @foreach($obat as $data)
+                    <option value="{{$data->id}}">{{$data->nama}}</option>
+                    @endforeach
+                  </select>
+                </div>
+                <h6>Keterangan obat:</h6>
+                <ul>
+                  <li id="detail_nama_obat">Nama Obat : </li>
+                  <li id="detail_stok_obat">Stok : </li>
+                  <br>
+                  <br>
+                  <br>
+                </ul>
+                <div class="form-group">
+                  <label class="col-form-label">Jumlah Obat (Bungkus):</label>
+                  <input type="text" class="form-control" id="detail_jumlah_pakan" name="jumlah_obat">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> 
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Send message</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END MODAL -->
 @endsection
 
 @section('js')
 <script type="text/javascript">
+  $('#modal-edit-data').on('show.bs.modal', function (event) {
+  var button = $(event.relatedTarget) // Button that triggered the modal
+  var user_id = button.data('user_id')  //peternak id
+  var pakan_id = button.data('pakan_id') 
+  var obat_id = button.data('obat_id') 
+  var jml_ayam = button.data('jumlah_ayam') 
+  var jml_obat = button.data('jumlah_obat')
+  var jml_pakan = button.data('jumlah_pakan')  
+
+  var modal = $(this)
+  // modal.find('.modal-body #edit-pengecer').attr('action', href)
+  modal.find('.modal-body #detail_peternak').val(user_id)
+  modal.find('.modal-body #detail_obat').val(obat_id)
+  modal.find('.modal-body #detail_pakan').val(pakan_id)
+  modal.find('.modal-body #detail_jumlah_ayam').val(jml_ayam)
+  modal.find('.modal-body #detail_jumlah_pakan').val(jml_pakan)
+  modal.find('.modal-body #detail_jumlah_obat').val(jml_obat)
+})
+
   function hapus_data() { //membatalkan (menghapus) distribusi belum terkonfirmasi
    $(document).on('click', '#del_id', function(){
     Swal.fire({
@@ -265,26 +388,6 @@ Tambah Distribusi
       }
     })
   });
-
-  $('#modal-edit-data').on('show.bs.modal', function (event) {
-  var button = $(event.relatedTarget) // Button that triggered the modal
-  var href = button.data('href') 
-  var id = button.data('id') 
-  var name = button.data('name') 
-  var noktp = button.data('noktp') 
-  var email = button.data('email') 
-  var nohp = button.data('nohp')
-  var alamat = button.data('alamat')  
-
-  var modal = $(this)
-  modal.find('.modal-body #edit-pengecer').attr('action', href)
-  modal.find('.modal-body #hidden-id').val(id)
-  modal.find('.modal-body #name').val(name)
-  modal.find('.modal-body #noktp').val(noktp)
-  modal.find('.modal-body #email').val(email)
-  modal.find('.modal-body #nohp').val(nohp)
-  modal.find('.modal-body #alamat').val(alamat)
-})
 
   function berhasil(status, pesan) {
     Swal.fire({
