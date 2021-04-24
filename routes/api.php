@@ -141,4 +141,5 @@ Route::post('laporan-harian', 'Api\LaporanHarianController@store'); //input lapo
 
 //LAPORAN PANEN
 Route::post('laporan-panen', 'Api\LaporanPanenController@store'); //input laporan panen 
+Route::post('list-panen', 'Api\LaporanPanenController@list'); //list panen per users (id)
 // END LAPORANH PANEN
