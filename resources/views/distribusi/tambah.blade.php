@@ -156,11 +156,15 @@ Tambah Distribusi
   <div class="modal-dialog modal-xl" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Edit Distribusi Belum Terkonfirmasi</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
+      <form method="post" id="edit-distribusi">
+        @csrf
+        <input type="hidden" id="hidden-edit">
+        <input type="hidden" name="_method" value="put">
       <div class="modal-body">
         <div class="row">
           <div class="col-4">
@@ -168,7 +172,7 @@ Tambah Distribusi
               <div class="card-body">
                 <div class="form-group">
                   <label class="col-form-label">Nama Peternak:</label>
-                  <select class="form-control" id="detail_peternak" name="id_peternak">
+                  <select class="form-control" id="detail_peternak">
                     <option>Pilih Peternak</option>
                     @foreach($peternak as $data)
                     <option value="{{$data->id}}">{{$data->name}} ID {{$data->id}}</option>
@@ -185,7 +189,7 @@ Tambah Distribusi
                 </ul>
                 <div class="form-group">
                   <label class="col-form-label">Jumlah Ayam (Ekor):</label>
-                  <input type="text" class="form-control" id="detail_jumlah_pakan" name="jumlah_ayam">
+                  <input type="text" class="form-control" id="detail_jumlah_ayam" name="jumlah_ayam">
                 </div>
               </div>
             </div>
@@ -195,7 +199,7 @@ Tambah Distribusi
               <div class="card-body">
                 <div class="form-group">
                   <label class="col-form-label">Nama Pakan:</label>
-                  <select class="form-control" id="detail_pakan" name="id_pakan">
+                  <select class="form-control" id="detail_pakan" name="pakan_id">
                     <option>Pilih Pakan</option>
                     @foreach($pakan as $data)
                     <option value="{{$data->id}}">{{$data->nama}}</option>
@@ -222,7 +226,7 @@ Tambah Distribusi
               <div class="card-body">
                 <div class="form-group">
                   <label class="col-form-label">Nama Obat:</label>
-                  <select class="form-control" id="detail_obat" name="id_obat">
+                  <select class="form-control" id="detail_obat" name="obat_id">
                     <option>Pilih Obat</option>
                     @foreach($obat as $data)
                     <option value="{{$data->id}}">{{$data->nama}}</option>
@@ -239,7 +243,7 @@ Tambah Distribusi
                 </ul>
                 <div class="form-group">
                   <label class="col-form-label">Jumlah Obat (Bungkus):</label>
-                  <input type="text" class="form-control" id="detail_jumlah_pakan" name="jumlah_obat">
+                  <input type="text" class="form-control" id="detail_jumlah_obat" name="jumlah_obat">
                 </div>
               </div>
             </div>
@@ -248,8 +252,9 @@ Tambah Distribusi
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Send message</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
       </div>
+      </form>
     </div>
   </div>
 </div>
@@ -258,8 +263,43 @@ Tambah Distribusi
 
 @section('js')
 <script type="text/javascript">
+  $('#edit-distribusi').submit(function(e){ // tambah pengecer
+    e.preventDefault();
+
+    var request = new FormData(this);
+    var id = eval(document.getElementById("hidden-edit").value);
+    // alert(id);
+    var endpoint= 'update-distribusi/'+id;
+    $.ajax({
+      url: endpoint,
+      method: "POST",
+      data: request,
+      contentType: false,
+      cache: false,
+      processData: false,
+            // dataType: "json",
+            success:function(data){
+              if(data.status == 'success') {
+                $('#edit-distribusi')[0].reset();
+              }
+              $('#tabel_admin').DataTable().ajax.reload();
+              $('#modal-edit-data').modal('hide');
+              berhasil(data.status, data.pesan);
+            },
+            error: function(xhr, status, error){
+              var error = xhr.responseJSON; 
+              if ($.isEmptyObject(error) == false) {
+                $.each(error.errors, function(key, value) {
+                  gagal(key, value);
+                });
+              }
+            } 
+          }); 
+  });
+
   $('#modal-edit-data').on('show.bs.modal', function (event) {
   var button = $(event.relatedTarget) // Button that triggered the modal
+  var distribusi_id = button.data('id')
   var user_id = button.data('user_id')  //peternak id
   var pakan_id = button.data('pakan_id') 
   var obat_id = button.data('obat_id') 
@@ -268,7 +308,36 @@ Tambah Distribusi
   var jml_pakan = button.data('jumlah_pakan')  
 
   var modal = $(this)
-  // modal.find('.modal-body #edit-pengecer').attr('action', href)
+  $.ajax({
+      'url': "keterangan-peternak/"+user_id,
+      'dataType': 'json',
+      success:function(data){
+        $('#detail_ket_nama').text("Nama : "+data.name);
+        $('#detail_ket_nohp').text("No HP : "+data.nohp);
+        $('#detail_ket_alamat').text("Alamat : "+data.alamat);
+        $('#detail_ket_email').text("Email : "+data.email);
+        $('#detail_ket_ktp').text("No KTP : "+data.noktp);
+      }
+    })
+
+  $.ajax({
+    'url': "keterangan-pakan/"+pakan_id,
+    'dataType': 'json',
+    success:function(data){
+      $('#detail_nama_pakan').text("Nama Pakan : "+data.nama);
+      $('#detail_stok_pakan').text("Stok : "+data.stok+" Bungkus");
+    }
+  })
+
+  $.ajax({
+      'url': "keterangan-obat/"+obat_id,
+      'dataType': 'json',
+      success:function(data){
+        $('#detail_nama_obat').text("Nama Obat : "+data.nama);
+        $('#detail_stok_obat').text("Stok : "+data.stok+" Bungkus");
+      }
+    })
+  modal.find('#hidden-edit').val(distribusi_id)
   modal.find('.modal-body #detail_peternak').val(user_id)
   modal.find('.modal-body #detail_obat').val(obat_id)
   modal.find('.modal-body #detail_pakan').val(pakan_id)
@@ -350,6 +419,48 @@ Tambah Distribusi
           }); 
   });
 
+  //KETERANGAN DI MODAL EDIT
+  $('#detail_peternak').on('change', function() { //keterangan peternak
+    var id = $('#detail_peternak').val();
+    $.ajax({
+      'url': "keterangan-peternak/"+id,
+      'dataType': 'json',
+      success:function(data){
+        $('#detail_ket_nama').text("Nama : "+data.name);
+        $('#detail_ket_nohp').text("No HP : "+data.nohp);
+        $('#detail_ket_alamat').text("Alamat : "+data.alamat);
+        $('#detail_ket_email').text("Email : "+data.email);
+        $('#detail_ket_ktp').text("No KTP : "+data.noktp);
+      }
+    })
+  });
+
+  $('#detail_pakan').on('change', function() { //keterangan pakan
+    var id = $('#detail_pakan').val();
+    $.ajax({
+      'url': "keterangan-pakan/"+id,
+      'dataType': 'json',
+      success:function(data){
+        $('#detail_nama_pakan').text("Nama Pakan : "+data.nama);
+        $('#detail_stok_pakan').text("Stok : "+data.stok+" Bungkus");
+      }
+    })
+  });
+
+  $('#detail_obat').on('change', function() { //keterangan obat
+    var id = $('#detail_obat').val();
+    $.ajax({
+      'url': "keterangan-obat/"+id,
+      'dataType': 'json',
+      success:function(data){
+        $('#detail_nama_obat').text("Nama Obat : "+data.nama);
+        $('#detail_stok_obat').text("Stok : "+data.stok+" Bungkus");
+      }
+    })
+  });
+  //END KETERANGAN DI MODAL EDIT
+
+
   $('#peternak').on('change', function() { //keterangan peternak
     var id = $('#peternak').val();
     $.ajax({
@@ -397,66 +508,6 @@ Tambah Distribusi
       button: "Ok"
     })
   } 
-
-  $('#edit-pengecer').submit(function(e){ //edit pengecer
-    e.preventDefault();
-
-    var request = new FormData(this);
-    var endpoint= '{{route("manage.peternak.update")}}';
-    $.ajax({
-      url: endpoint,
-      method: "POST",
-      data: request,
-      contentType: false,
-      cache: false,
-      processData: false,
-            // dataType: "json",
-            success:function(data){
-              $('#add')[0].reset();
-              $('#tabel_admin').DataTable().ajax.reload();
-              $('#modal-edit-data').modal('hide');
-              berhasil(data.status, data.pesan);
-            },
-            error: function(xhr, status, error){
-              var error = xhr.responseJSON; 
-              if ($.isEmptyObject(error) == false) {
-                $.each(error.errors, function(key, value) {
-                  gagal(key, value);
-                });
-              }
-            } 
-          }); 
-  });
-
-  $('#add').submit(function(e){ // tambah pengecer
-    e.preventDefault();
-
-    var request = new FormData(this);
-    var endpoint= '{{route("manage.peternak.store")}}';
-    $.ajax({
-      url: endpoint,
-      method: "POST",
-      data: request,
-      contentType: false,
-      cache: false,
-      processData: false,
-            // dataType: "json",
-            success:function(data){
-              $('#add')[0].reset();
-              $('#tabel_admin').DataTable().ajax.reload();
-              $('#tambah-admin').modal('hide');
-              berhasil(data.status, data.pesan);
-            },
-            error: function(xhr, status, error){
-              var error = xhr.responseJSON; 
-              if ($.isEmptyObject(error) == false) {
-                $.each(error.errors, function(key, value) {
-                  gagal(key, value);
-                });
-              }
-            } 
-          }); 
-  });
 
   tabel = $(document).ready(function(){
     $('#tabel_admin').DataTable({

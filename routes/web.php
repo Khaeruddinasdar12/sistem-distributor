@@ -57,7 +57,7 @@ Route::prefix('admin')->group(function() {
 
 	Route::get('/tambah-distribusi','DistribusiController@tambah')->name('distribusi.tambah'); //halaman tambah distribusi
 	Route::post('/tambah-distribusi','DistribusiController@store')->name('distribusi.tambah.store'); // tambah distribusi post
-	Route::post('/update-distribusi','DistribusiController@update')->name('distribusi.update.store'); //update atau edit distribusi belum terkonfirmasi
+	Route::put('/update-distribusi/{id}','DistribusiController@update')->name('distribusi.update.store'); //update atau edit distribusi belum terkonfirmasi
 	Route::get('/sedang-distribusi','DistribusiController@sedang')->name('distribusi.sedang'); //halaman sedang distribusi (sedang berlangsung)
 	Route::get('/riwayat-distribusi','DistribusiController@riwayat')->name('distribusi.riwayat'); //halaman sedang distribusi (sedang berlangsung)
 

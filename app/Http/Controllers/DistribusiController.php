@@ -59,13 +59,13 @@ class DistribusiController extends Controller
 
         return Datatables::of($data)
         ->addColumn('action', function ($data) {
-    		return "
-    		<a href ='/admin/laporan-harian/".$data->no_distribusi."' class='btn btn-warning btn-xs'
-    		title='lihat laporan harian'
-    		>
-    		<i class='fa fa-eye'></i>
-    		</a>";
-    	})
+          return "
+          <a href ='/admin/laporan-harian/".$data->no_distribusi."' class='btn btn-warning btn-xs'
+          title='lihat laporan harian'
+          >
+          <i class='fa fa-eye'></i>
+          </a>";
+      })
         ->addIndexColumn() 
         ->make(true);
     }
@@ -87,13 +87,13 @@ class DistribusiController extends Controller
 
         return Datatables::of($data)
         ->addColumn('action', function ($data) {
-    		return "
-    		<a href ='/admin/laporan-harian/".$data->no_distribusi."' class='btn btn-warning btn-xs'
-    		title='lihat laporan harian'
-    		>
-    		<i class='fa fa-eye'></i>
-    		</a>";
-    	})
+          return "
+          <a href ='/admin/laporan-harian/".$data->no_distribusi."' class='btn btn-warning btn-xs'
+          title='lihat laporan harian'
+          >
+          <i class='fa fa-eye'></i>
+          </a>";
+      })
         ->addIndexColumn() 
         ->make(true);
     }
@@ -111,31 +111,31 @@ class DistribusiController extends Controller
 
         return Datatables::of($data)
         ->addColumn('action', function ($data) {
-    		return "
-            <a class='btn btn-success btn-xs'
-            data-toggle='modal' 
-            data-target='#modal-edit-data'
-            title='edit pengecer' 
-            href='edit-distribusi'
-            data-user_id='".$data->user_id."'
-            data-pakan_id='".$data->pakan_id."'
-            data-obat_id='".$data->obat_id."'
-            data-jumlah_ayam='".$data->jumlah_ayam."'
-            data-jumlah_obat='".$data->jumlah_obat."'
-            data-jumlah_pakan='".$data->jumlah_pakan."'
-            >
-            <i class='fa fa-edit'></i>
-            </a>
+          return "
+          <a class='btn btn-success btn-xs'
+          data-toggle='modal' 
+          data-target='#modal-edit-data'
+          title='edit pengecer' 
+          data-id='".$data->id."'
+          data-user_id='".$data->user_id."'
+          data-pakan_id='".$data->pakan_id."'
+          data-obat_id='".$data->obat_id."'
+          data-jumlah_ayam='".$data->jumlah_ayam."'
+          data-jumlah_obat='".$data->jumlah_obat."'
+          data-jumlah_pakan='".$data->jumlah_pakan."'
+          >
+          <i class='fa fa-edit'></i>
+          </a>
 
-    		<button class='btn btn-danger btn-xs'
-    		title='hapus obat'
-    		id='del_id' 
-    		onclick='hapus_data()'
-    		href='cancel-distribusi/".$data->id."'
-    		>
-    		<i class='fa fa-trash'></i>
-    		</button>";
-    	})
+          <button class='btn btn-danger btn-xs'
+          title='hapus obat'
+          id='del_id' 
+          onclick='hapus_data()'
+          href='cancel-distribusi/".$data->id."'
+          >
+          <i class='fa fa-trash'></i>
+          </button>";
+      })
         ->addIndexColumn() 
         ->make(true);
     }
@@ -196,6 +196,107 @@ class DistribusiController extends Controller
     		'status' => 'success',
     		'pesan' => 'Berhasil Menambah Data Distribusi.'
     	);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $validasi = $this->validate($request, [
+            'pakan_id'      => 'required|numeric',
+            'obat_id'       => 'required|numeric',
+            'jumlah_obat'   => 'required|numeric|min:1',
+            'jumlah_pakan'  => 'required|numeric|min:1',
+            'jumlah_ayam'   => 'required|numeric|min:1',
+        ]);
+
+        $data = Distribusi::find($id);
+        if($data == '') {
+            return $arrayName = array(
+                'status' => 'error',
+                'pesan' => 'Id Distribusi tidak ditemukan',
+            );
+        }
+
+        // OBAT
+        $obatLama = Obat::findOrFail($data->obat_id);
+
+        if($data->obat_id == $request->obat_id) {
+            if($request->jumlah_obat < $data->jumlah_obat || $request->jumlah_obat > $data->jumlah_obat) {
+
+                $obatLama->stok = $obatLama->stok + $data->jumlah_obat - $request->jumlah_obat;
+                if($obatLama->stok < $request->jumlah_obat){//cek stok
+                    return $arrayName = array(
+                        'status' => 'error',
+                        'pesan' => 'Stok Obat Tidak Cukup',
+                    );
+                }
+                $obatLama->save();
+            }
+        } else if ($data->obat_id != $request->obat_id){
+            $obatLama->stok = $obatLama->stok + $data->jumlah_obat;
+            
+            $obatBaru = Obat::findOrFail($request->obat_id);
+            if($obatBaru->stok < $request->jumlah_obat){//cek stok
+                return $arrayName = array(
+                    'status' => 'error',
+                    'pesan' => 'Stok Obat Tidak Cukup',
+                );
+            }
+            $obatBaru->stok = $obatBaru->stok - $request->jumlah_obat;
+            $obatLama->save();
+            $obatBaru->save();
+        }
+
+        
+        
+        // PAKAN
+        $pakanLama = Pakan::findOrFail($data->pakan_id);
+        if($data->pakan_id == $request->pakan_id) {
+            if($request->jumlah_pakan < $data->jumlah_pakan || $request->jumlah_pakan > $data->jumlah_pakan) {
+                $pakanLama->stok = $pakanLama->stok + $data->jumlah_pakan - $request->jumlah_pakan;
+                if($pakanLama->stok < $request->jumlah_pakan){//cek stok
+                    return $arrayName = array(
+                        'status' => 'error',
+                        'pesan' => 'Stok pakan Tidak Cukup',
+                    );
+                }
+                $pakanLama->save();
+            }
+        } else if ($data->pakan_id != $request->pakan_id) {
+            $pakanLama->stok = $pakanLama->stok + $data->jumlah_pakan;
+            
+            $pakanBaru = Pakan::findOrFail($request->pakan_id);
+            if($pakanBaru->stok < $request->jumlah_pakan){//cek stok
+                return $arrayName = array(
+                    'status' => 'error',
+                    'pesan' => 'Stok pakan Tidak Cukup',
+                );
+            }
+            $pakanBaru->stok = $pakanBaru->stok - $request->jumlah_pakan;
+            $pakanLama->save();
+            $pakanBaru->save();
+        }
+        
+
+        $data->jumlah_obat = $request->jumlah_obat;
+        $data->jumlah_pakan = $request->jumlah_pakan;
+        $data->obat_id = $request->obat_id;
+        $data->pakan_id = $request->pakan_id;
+        $data->jumlah_ayam = $request->jumlah_ayam;
+        $data->admin_id = Auth::guard('admin')->user()->id;
+        $data->save();
+
+        //update pakan & obat lama
+        // if($data) {
+        //     $cekObat->stok = $cekObat->stok - $request->jumlah_obat;
+        //     $cekObat->save();
+        //     $cekPakan->stok = $cekPakan->stok - $request->jumlah_pakan;
+        //     $cekPakan->save();
+        // }
+
+        return $arrayName = array(
+            'status' => 'success',
+            'pesan' => 'Berhasil Mengubah Data Distribusi.'
+        );
     }
 
     public function ket_peternak($id) //keterangan peternak
