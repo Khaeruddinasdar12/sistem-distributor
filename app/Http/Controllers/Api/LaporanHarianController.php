@@ -128,7 +128,7 @@ class LaporanHarianController extends Controller
             ]);
         }
 
-        $dt = LaporanHarian::where('distribusi_id', $data->id)
+        $dt = LaporanHarian::where('distribusi_id', $request->distribusi_id)
                 ->get();
         return response()->json([
             'status'    => true,
