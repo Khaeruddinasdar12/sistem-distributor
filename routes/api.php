@@ -137,6 +137,7 @@ Route::post('tutup-distribusi', 'Api\DistribusiController@tutup'); //mengkonfirm
 
 //LAPORAN HARIAN
 Route::post('laporan-harian', 'Api\LaporanHarianController@store'); //input laporan harian 
+Route::post('list-laporan-harian', 'Api\LaporanHarianController@list'); //list laporan harian per id distribusi & id peternak
 // END LAPORANH HARIAN
 
 //LAPORAN PANEN

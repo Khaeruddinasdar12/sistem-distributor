@@ -96,4 +96,44 @@ class LaporanHarianController extends Controller
         ]);
 
     }
+
+    public function list(Request $request) //list laporan harian per id distribusi & id peternak
+    {
+        $validator = Validator::make($request->all(), [
+            'user_id'     => 'required|numeric',
+            'distribusi_id' => 'required|numeric',
+        ]);
+
+        if($validator->fails()) {
+            $message = $validator->messages()->first();
+            return response()->json([
+                'status' => false,
+                'message' => $message
+            ]);
+        }
+
+        $data = User::find($request->user_id);
+
+        if($data == '') {
+            return response()->json([
+                'status'    => false,
+                'message'   => 'Id Tidak ditemukan'
+            ]);
+        }
+
+        if($data->role != 'peternak' ) {
+            return response()->json([
+                'status'    => false,
+                'message'   => 'User ini BUKAN peternak, user ini pengecer'
+            ]);
+        }
+
+        $dt = LaporanHarian::where('distribusi_id', $data->id)
+                ->get();
+        return response()->json([
+            'status'    => true,
+            'message'   => 'list laporan harian per distribusi & per peternak',
+            'data'      => $dt,
+        ]);
+    }
 }
