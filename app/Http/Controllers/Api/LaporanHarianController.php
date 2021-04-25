@@ -126,13 +126,29 @@ class LaporanHarianController extends Controller
                 'status'    => false,
                 'message'   => 'User ini BUKAN peternak, user ini pengecer'
             ]);
+        }        
+
+        if(!empty($request->waktu)) {
+            $bln = date('m', strtotime($request->waktu)); //yyyy-mm-dd
+            $thn = date('Y', strtotime($request->waktu)); //yyyy-mm-dd
+
+            $dt = LaporanHarian::where('distribusi_id', $request->distribusi_id)
+            ->whereMonth('created_at', $bln)
+            ->whereYear('created_at', $thn)
+            ->get();
+        } else {
+            $time = Carbon::now();
+            $blnIni = $time->now()->month;
+            $thnIni = $time->now()->year;
+            $dt = LaporanHarian::where('distribusi_id', $request->distribusi_id)
+            ->whereMonth('created_at', $blnIni)
+            ->whereYear('created_at', $thnIni)
+            ->get();
         }
 
-        $dt = LaporanHarian::where('distribusi_id', $request->distribusi_id)
-                ->get();
         return response()->json([
             'status'    => true,
-            'message'   => 'list laporan harian per distribusi & per peternak',
+            'message'   => 'list laporan harian per distribusi & per peternak '.$request->waktu,
             'data'      => $dt,
         ]);
     }
