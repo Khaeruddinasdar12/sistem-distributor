@@ -128,13 +128,21 @@ class LaporanHarianController extends Controller
             ]);
         }        
 
+
         if(!empty($request->waktu)) {
-            $bln = date('m', strtotime($request->waktu)); //yyyy-mm-dd
-            $thn = date('Y', strtotime($request->waktu)); //yyyy-mm-dd
+            $arraybln = array("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"); 
+            if(!in_array($request->waktu, $arraybln)) {
+                return response()->json([
+                    'status'    => false,
+                    'message'   => 'bulan harus angka 1-12'
+                ]);
+            }
+            // $bln = date('m', strtotime($request->waktu)); //yyyy-mm-dd
+            // $thn = date('Y', strtotime($request->waktu)); //yyyy-mm-dd
 
             $dt = LaporanHarian::where('distribusi_id', $request->distribusi_id)
-            ->whereMonth('created_at', $bln)
-            ->whereYear('created_at', $thn)
+            ->whereMonth('created_at', $request->waktu)
+            ->whereYear('created_at', 2021)
             ->get();
         } else {
             $time = Carbon::now();
@@ -148,7 +156,7 @@ class LaporanHarianController extends Controller
 
         return response()->json([
             'status'    => true,
-            'message'   => 'list laporan harian per distribusi & per peternak '.$request->waktu,
+            'message'   => 'list laporan harian per distribusi & per peternak',
             'data'      => $dt,
         ]);
     }
