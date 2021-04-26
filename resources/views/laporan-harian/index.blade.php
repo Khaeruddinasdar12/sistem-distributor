@@ -29,7 +29,7 @@ Laporan Harian
             </div> 
             <br>
             <br>
-            <div class="table-responsive-sm">
+            <div class="table-responsive">
               <table id="tabel_admin" class="table table-bordered" style="width:100% !important; ">
                 <thead>
                   <tr>

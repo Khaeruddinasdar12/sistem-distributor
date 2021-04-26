@@ -75,7 +75,7 @@ class ManagePengecer extends Controller
 		$data->noktp 	= $request->noktp;
 		$data->nohp 	= $request->nohp;
 		$data->alamat 	= $request->alamat;
-		if($request->password == null) {
+		if($request->password != null) {
 			$data->password = bcrypt($request->password);
 		}
 

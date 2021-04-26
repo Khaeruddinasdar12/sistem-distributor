@@ -45,6 +45,7 @@ class DistribusiController extends Controller
                 ->join('pakans', 'distribusis.pakan_id', 'pakans.id')
                 ->where('distribusis.status', '0') //belum terkonfirmasi
                 ->where('distribusis.open', '0') // masih berlangsung
+                ->where('distribusis.user_id', $data->id) 
                 ->orderBy('distribusis.created_at', 'desc')
                 ->get();
     	return response()->json([
@@ -88,6 +89,7 @@ class DistribusiController extends Controller
                 ->join('pakans', 'distribusis.pakan_id', 'pakans.id')
                 ->where('distribusis.status', '1') // terkonfirmasi
                 ->where('distribusis.open', '0') // masih berlangsung
+                ->where('distribusis.user_id', $data->id) 
                 ->orderBy('distribusis.created_at', 'desc')
                 ->get();
 
@@ -133,6 +135,7 @@ class DistribusiController extends Controller
                 ->join('pakans', 'distribusis.pakan_id', 'pakans.id')
                 ->where('distribusis.status', '1') // terkonfirmasi
                 ->where('distribusis.open', '1') // telah ditutup (riwayat)
+                ->where('distribusis.user_id', $data->id) 
                 ->orderBy('distribusis.created_at', 'desc')
                 ->get();
 
