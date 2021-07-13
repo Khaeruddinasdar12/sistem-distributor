@@ -171,7 +171,11 @@ Laporan Harian
     function datatable(waktu = '') {
       $('#tabel_admin').DataTable({
         "processing": true,
-
+        "dom": "Bfrtip",
+        "buttons": [
+        "print",
+        "pdf"
+        ],
         "serverSide": true,
         "deferRender": true,
         "ordering": true,

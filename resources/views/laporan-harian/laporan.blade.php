@@ -15,7 +15,7 @@ Laporan Harian Distribusi
 
       <div class="card">
         <div class="card-header">
-          <h2 class="card-title"><i class="fa fa-calendar"></i> Laporan Harian Distribusi </h2>
+          <h2 class="card-title"><i class="fa fa-calendar"></i> Laporan Harian Distribusi</h2>
         </div>
         <!-- /.card-header -->
         <div class="card-body">

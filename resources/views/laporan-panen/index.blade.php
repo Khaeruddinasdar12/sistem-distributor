@@ -48,6 +48,8 @@ Laporan Panen
 @endsection
 
 @section('js')
+<!-- <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.7.1/js/dataTables.buttons.min.js"></script> -->
+<!-- <script type="text/javascript" src="{{asset('print.min.js')}}"></script> -->
 <script type="text/javascript">
 
 
@@ -59,6 +61,11 @@ Laporan Panen
 
     function datatable(waktu = '') {
       $('#tabel_admin').DataTable({
+        "dom": "Bfrtip",
+        "buttons": [
+        "print",
+        "pdf"
+        ],
         "processing": true,
 
         "serverSide": true,
@@ -79,7 +86,7 @@ Laporan Panen
         { "data": "umur_panen" },
         { "data": "jumlah_panen" },
         { "data": "created_at"}
-        ]
+        ],
       });
     }
 
